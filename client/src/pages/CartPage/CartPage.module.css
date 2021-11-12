@@ -1,0 +1,151 @@
+@media all and (max-width: 600px) {
+    .cart__wrapper span {
+        padding: 0% 0% 0% 10%;
+    }
+}
+
+
+.cart__wrapper {
+    background: #F2FAFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.cart__wrapper span {
+    font-weight: bold;
+    font-size: 40px;
+    color: #244E72;
+    margin-bottom: 1rem;
+
+}
+
+.content__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 80px;
+}
+
+.services__wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.service__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 5% 5% 5% 5%;
+    padding: 5% 5% 5% 5%;
+
+    background: #00A2FA;
+    border-radius: 30px;
+
+
+}
+
+.service__wrapper h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5% 3% 5% 3%;
+
+
+    background: #FFFFFF;
+    border-radius: 3px;
+
+
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 18px;
+
+    color: #00A2FA;
+
+}
+
+.service__wrapper h2 {
+    font-weight: bold;
+    font-size: 20px;
+    color: #FFFFFF;
+
+}
+
+.service__wrapper button {
+    padding: 5% 5% 5% 5%;
+
+    background: #0094E4;
+    border-radius: 5px;
+
+    font-weight: bold;
+    font-size: 20px;
+
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+}
+
+
+.services__payment__wrapper {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.service__payment__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 402px;
+    min-height: 229px;
+    padding: 5% 5% 5% 5%;
+    background: #00A2FA;
+    border-radius: 30px;
+}
+
+.service__payment__wrapper h4 {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 29px;
+
+    color: #FFFFFF;
+
+}
+
+.service__payment__wrapper button {
+    padding: 3% 3% 3% 3%;
+
+    background: #0094E4;
+    border-radius: 5px;
+
+    font-weight: bold;
+    font-size: 20px;
+
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+}
+
+.toys__wrapper {
+    background: #F2FAFF;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 70px;
+    column-gap: 5%;
+
+
+    padding: 10% 10% 5% 10%;
+}

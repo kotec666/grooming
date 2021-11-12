@@ -1,0 +1,68 @@
+.login__wrapper {
+    background: #F2FAFF;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 15%;
+    padding-bottom: 15%;
+    margin-bottom: 5rem;
+
+
+}
+
+.form__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 50px;
+
+
+    background: #FFFFFF;
+    border: 3px solid #0067BA;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    padding: 5% 0% 5% 0%;
+    width: 50%;
+    min-height: 407px;
+
+    min-width: 200px;
+}
+
+.form__wrapper input {
+    width: 59%;
+    height: 74px;
+    border: 1px solid #0067BA;
+    border-radius: 10px;
+    padding-left: 10px;
+    font-size: 25px;
+    line-height: 29px;
+
+    color: rgba(0, 0, 0, 0.5);
+}
+
+
+.btn__wrapper {
+
+}
+
+
+.btn__wrapper button {
+    min-width: 130px;
+    height: 50px;
+
+    border: none;
+    outline: none;
+    background: #0094E4;
+    border-radius: 5px;
+
+
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    padding: 10px 10px 10px 10px;
+    color: #FFFFFF;
+}

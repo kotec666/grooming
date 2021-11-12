@@ -1,0 +1,40 @@
+@media all and (max-width: 500px) {
+    .toy__pagination__wrapper {
+        flex-direction: column;
+    }
+
+    .toy__pagination__wrapper {
+        width: 250px;
+        height: 60px;
+    }
+
+}
+
+.toy__pagination__wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+
+    width: 70%;
+}
+
+.toy__pagination__wrapper button {
+    width: 32%;
+    height: 104px;
+
+    cursor: pointer;
+    background: #00A2FA;
+    border-radius: 30px;
+
+    outline: none;
+    border: none;
+    color: #FFFFFF;
+
+    font-weight: bold;
+    font-size: 35px;
+
+
+    margin: 5% 5% 5% 5%;
+    padding: 0% 5% 0% 5%;
+}

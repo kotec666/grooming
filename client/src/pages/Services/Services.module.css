@@ -1,0 +1,152 @@
+@media all and (max-width: 1300px) {
+    .service__wrapper h3 {
+        font-size: 20px;
+        color: #000000;
+    }
+
+    .service__price__wrapper h4 {
+        font-size: 15px;
+    }
+
+    .service__desc__wrapper h4 {
+        font-size: 15px;
+    }
+
+
+    .service__name__wrapper h3 {
+        font-size: 20px;
+    }
+}
+
+@media all and (max-width: 530px) {
+    .service__wrapper h3 {
+        font-size: 15px;
+    }
+
+    .service__price__wrapper h4 {
+        font-size: 10px;
+    }
+
+    .service__desc__wrapper h4 {
+        font-size: 10px;
+    }
+
+
+    .service__name__wrapper h3 {
+        font-size: 15px;
+    }
+}
+
+
+
+.content__wrapper {
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+    margin-bottom: 5rem;
+    background-color: #F2FAFF;
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.services__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding: 1% 0% 1% 1%;
+}
+
+.service__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    max-width: 800px;
+
+    padding: 1% 0% 1% 1%;
+    margin: 5% 5% 0% 5%;
+}
+
+.service__wrapper h3 {
+    font-size: 20px;
+    color: #000000;
+}
+
+
+
+.types__service__wrapper {
+    padding: 1% 0% 1% 1%;
+}
+
+.service__name__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #0098D9;
+    border-radius: 10px;
+    padding: 1% 0% 1% 1%;
+
+    margin: 0% 5% 0% 2%;
+}
+
+.service__name__wrapper h3 {
+    font-size: 20px;
+
+    color: #FFFFFF;
+    padding: 1% 0% 1% 1%;
+}
+
+.service__desc__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0% 0% 0% 5%;
+    background: #FFFFFF;
+
+    margin: 0% 5% 0% 2%;
+}
+
+.service__desc__wrapper h4 {
+    font-size: 15px;
+    color: #000000;
+}
+
+
+
+
+.service__price__wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+
+    padding: 1% 1% 1% 1%;
+}
+
+.service__price__wrapper h4 {
+    font-size: 15px;
+    margin: 1% 1% 1% 1%;
+}
+
+
+
+.service__price__wrapper button {
+    border: none;
+    outline: none;
+
+    font-weight: bold;
+    font-size: 15px;
+
+    color: #FFFFFF;
+    padding: 5% 3% 5% 3%;
+    background: #0094E4;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 1% 1% 1% 1%;
+}
