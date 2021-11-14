@@ -10,20 +10,38 @@ class BasketToysController {
         return res.json(basketToys)
     }
 
-    async getAll(req, res, next) {
+
+    async deleteOne(req, res, next) {
         try {
-            const basketToys = await BasketToy.findAll()
-            return res.json(basketToys)
+            const basketToys = await BasketToy.findAll({
+                where: {
+                    id: +req.params.id
+                }
+            })
+            const toy = basketToys[0]
+            await toy.destroy()
+            res.status(204).json({})
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
     }
 
-    async getOne(req, res) {
-        const {id} = req.params
-        const basketToys = await BasketToy.findOne({where: {id}})
-        return res.json(basketToys)
-    }
+    // async getAll(req, res, next) {
+    //     try {
+    //         const basketToys = await BasketToy.findAll()
+    //         return res.json(basketToys)
+    //     } catch (e) {
+    //         next(ApiError.badRequest(e.message))
+    //     }
+    // }
+
+    // async getOne(req, res) {
+    //     const {id} = req.params
+    //     const basketToys = await BasketToy.findOne({where: {id}})
+    //     return res.json(basketToys)
+    // }
+
+
 }
 
 module.exports = new BasketToysController()

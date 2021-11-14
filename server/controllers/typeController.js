@@ -34,14 +34,14 @@ class TypeController {
             page = page || 1
             limit = limit || 9
             let offset = page * limit - limit
-            const types = await Type.findAndCountAll({include: [{model: Service, as: 'servicesData'}], offset: +offset, limit: +limit})
+            const types = await Type.findAndCountAll({include: [{model: Service, as: 'servicesData'}], offset: +offset, limit: +limit}) //{include: [{model: Service, as: 'servicesData'}], {offset: +offset, limit: +limit}},
             return res.json(types)
          } catch (e) {
                 next(ApiError.badRequest(e.message))
         }
     }
 
-//{include: [{model: Service, as: 'servicesData'}], {offset: +offset, limit: +limit}},
+
 
     async getOne(req, res, next) {
         try {
@@ -57,6 +57,22 @@ class TypeController {
             next(ApiError.badRequest(e.message))
         }
 
+    }
+
+
+    async deleteOne(req, res, next) {
+        try {
+            const types = await Type.findAll({
+                where: {
+                    id: +req.params.id
+                }
+            })
+            const type = types[0]
+            await type.destroy()
+            res.status(204).json({})
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
     }
 
 }

@@ -10,19 +10,19 @@ class ServiceController {
         return res.json(service)
     }
 
-    async getAll(req, res, next) {
+    async deleteOne(req, res, next) {
         try {
-            const services = await Service.findAll()
-            return res.json(services)
+            const services = await Service.findAll({
+                where: {
+                    id: +req.params.id
+                }
+            })
+            const service = services[0]
+            await service.destroy()
+            res.status(204).json({})
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
-    }
-
-    async getOne(req, res) {
-        const {id} = req.params
-        const service = await Service.findOne({where: {id}})
-        return res.json(service)
     }
 }
 
@@ -48,4 +48,20 @@ module.exports = new ServiceController()
 //     } catch (e) {
 //         next(ApiError.badRequest(e.message))
 //     }
+// }
+
+
+// async getAll(req, res, next) {
+//     try {
+//         const services = await Service.findAll()
+//         return res.json(services)
+//     } catch (e) {
+//         next(ApiError.badRequest(e.message))
+//     }
+// }
+//
+// async getOne(req, res) {
+//     const {id} = req.params
+//     const service = await Service.findOne({where: {id}})
+//     return res.json(service)
 // }

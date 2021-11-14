@@ -139,11 +139,25 @@ BasketService.belongsTo(Basket)
 Type.hasMany(Service, {as: 'servicesData'})
 Service.belongsTo(Type)
 
-Toy.hasMany(BasketToy)
+Toy.hasMany(BasketToy, {as: 'toys'})
 BasketToy.belongsTo(Toy)
 
-Service.hasMany(BasketService)
+Service.hasMany(BasketService, {as: 'services'})
 BasketService.belongsTo(Service)
+
+
+
+Toy.belongsToMany(Basket, {
+    through: {
+        model: BasketToy,
+        unique: false
+    },
+
+})
+
+Basket.belongsToMany(Toy, { through: BasketToy }) // A BelongsToMany B through the junction table C
+Basket.belongsToMany(Service, { through: BasketService })
+
 
 module.exports = {
     User, Basket, BasketToy, BasketService, Toy, Service, Type

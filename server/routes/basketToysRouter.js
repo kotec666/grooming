@@ -3,8 +3,9 @@ const router = new Router()
 const basketToysController = require('./../controllers/basketToysController')
 
 router.post('/', basketToysController.create)
-router.get('/', basketToysController.getAll)
-router.get('/:id', basketToysController.getOne)
+router.delete('/:id', basketToysController.deleteOne)
+//router.get('/', basketToysController.getAll)
+//router.get('/:id', basketToysController.getOne)
 
 
 

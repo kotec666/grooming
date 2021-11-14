@@ -13,9 +13,11 @@ router.use('/user', userRouter)
 router.use('/type', typeRouter)
 router.use('/toy', toyRouter)
 router.use('/basket', basketRouter)
-// router.use('/service', serviceRouter)
-// router.use('/basketServices', basketServicesRouter)
-// router.use('/basketToys', basketToysRouter)
+router.use('/service', serviceRouter)
+
+//создание корзинных элементов
+router.use('/basketServices', basketServicesRouter)
+router.use('/basketToys', basketToysRouter)
 
 
 module.exports = router

@@ -35,6 +35,23 @@ class ToyController {
         const toy = await Toy.findOne({where: {id}})
         return res.json(toy)
     }
+
+
+    async deleteOne(req, res, next) {
+        try {
+            const toys = await Toy.findAll({
+                where: {
+                    id: +req.params.id
+                }
+            })
+            const toy = toys[0]
+            await toy.destroy()
+            res.status(204).json({})
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
 }
 
 module.exports = new ToyController()
