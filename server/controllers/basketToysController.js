@@ -13,9 +13,13 @@ class BasketToysController {
 
     async deleteOne(req, res, next) {
         try {
+
+            const {basketId, toyId} = req.body
+
             const basketToys = await BasketToy.findAll({
                 where: {
-                    id: +req.params.id
+                    basketId,
+                    toyId
                 }
             })
             const toy = basketToys[0]
@@ -25,22 +29,6 @@ class BasketToysController {
             next(ApiError.badRequest(e.message))
         }
     }
-
-    // async getAll(req, res, next) {
-    //     try {
-    //         const basketToys = await BasketToy.findAll()
-    //         return res.json(basketToys)
-    //     } catch (e) {
-    //         next(ApiError.badRequest(e.message))
-    //     }
-    // }
-
-    // async getOne(req, res) {
-    //     const {id} = req.params
-    //     const basketToys = await BasketToy.findOne({where: {id}})
-    //     return res.json(basketToys)
-    // }
-
 
 }
 

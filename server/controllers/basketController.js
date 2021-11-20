@@ -24,7 +24,7 @@ class BasketController {
                 },
             )
 
-            return res.json({basket})
+            return res.json(basket)
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }

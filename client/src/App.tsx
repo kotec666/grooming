@@ -10,7 +10,7 @@ import RegistrationPage from "./pages/RegistrationPage/RegistrationPage"
 import ToysPage from './pages/ToysPage/ToysPage'
 import CartPage from './pages/CartPage/CartPage'
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
-import AdminPage from "./pages/AdminPage/AdminPage";
+import AdminPage from "./pages/AdminPage/AdminPage"
 
 
 function App() {

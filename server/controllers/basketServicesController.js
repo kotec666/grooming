@@ -16,9 +16,13 @@ class BasketServicesController {
 
     async deleteOne(req, res, next) {
         try {
+
+            const {basketId, serviceId} = req.body
+
             const basketServices = await BasketService.findAll({
                 where: {
-                    id: +req.params.id
+                    basketId,
+                    serviceId
                 }
             })
             const service = basketServices[0]
@@ -28,24 +32,6 @@ class BasketServicesController {
             next(ApiError.badRequest(e.message))
         }
     }
-
-
-    //
-    // async getAll(req, res, next) {
-    //     try {
-    //         const basketServices = await BasketService.findAll()
-    //         return res.json(basketServices)
-    //     } catch (e) {
-    //         next(ApiError.badRequest(e.message))
-    //     }
-    // }
-    //
-    // async getOne(req, res) {
-    //     const {id} = req.params
-    //     const basketServices = await BasketService.findOne({where: {id}})
-    //     return res.json(basketServices)
-    // }
-
 
 }
 

@@ -30,11 +30,11 @@ class TypeController {
 
     async getAll(req, res, next) {
         try {
-            let {limit, page} = req.query
+            let {_limit, page} = req.query
             page = page || 1
-            limit = limit || 9
-            let offset = page * limit - limit
-            const types = await Type.findAndCountAll({include: [{model: Service, as: 'servicesData'}], offset: +offset, limit: +limit}) //{include: [{model: Service, as: 'servicesData'}], {offset: +offset, limit: +limit}},
+            _limit = _limit || 9
+            let offset = page * _limit - _limit
+            const types = await Type.findAndCountAll({include: [{model: Service, as: 'servicesData'}], offset: +offset, limit: +_limit}) //{include: [{model: Service, as: 'servicesData'}], {offset: +offset, limit: +limit}},
             return res.json(types)
          } catch (e) {
                 next(ApiError.badRequest(e.message))

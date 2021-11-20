@@ -22,11 +22,11 @@ class ToyController {
     }
 
     async getAll(req, res) {
-        let {limit, page} = req.query
+        let {_limit, page} = req.query
         page = page || 1
-        limit = limit || 9
-        let offset = page * limit - limit
-        const toys = await Toy.findAndCountAll({offset: +offset, limit: +limit})
+        _limit = _limit || 9
+        let offset = page * _limit - _limit
+        const toys = await Toy.findAndCountAll({offset: +offset, limit: +_limit})
         return res.json(toys)
     }
 

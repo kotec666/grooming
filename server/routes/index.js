@@ -15,7 +15,7 @@ router.use('/toy', toyRouter)
 router.use('/basket', basketRouter)
 router.use('/service', serviceRouter)
 
-//создание корзинных элементов
+//создание и удаление корзинных элементов
 router.use('/basketServices', basketServicesRouter)
 router.use('/basketToys', basketToysRouter)
 
