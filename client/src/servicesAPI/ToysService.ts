@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react"
-import {IToys, IToy} from "../models/IToys"
+import {IToys, IToy, ICreateToyReq} from "../models/IToys"
 
 
 export const toyAPI = createApi({
@@ -16,11 +16,14 @@ export const toyAPI = createApi({
             }),
             providesTags: result => ['Toys']
         }),
-        createToy: build.mutation<IToy, IToy>({
+        createToy: build.mutation<IToy, ICreateToyReq>({
             query: (toy) => ({
                 url: `/toy`,
                 method: 'POST',
-                body: toy //form data
+                body: toy, //form data
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
             }),
             invalidatesTags: ['Toys']
         }),
@@ -28,6 +31,9 @@ export const toyAPI = createApi({
             query: (toy) => ({
                 url: `/toy/${toy.id}`,
                 method: 'DELETE',
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
             }),
             invalidatesTags: ['Toys']
         }),

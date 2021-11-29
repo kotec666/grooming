@@ -4,9 +4,6 @@ import {createAsyncThunk} from "@reduxjs/toolkit"
 import {IToys} from "../../models/IToys"
 import {IBasket} from "../../models/IBasket"
 
-// import {servicesSlice} from "./ServicesSlice"
-// import {AppDispatch} from "../store"
-
 
 // export const fetchServices = () => async (dispatch: AppDispatch) => {
 //     try {
@@ -59,3 +56,22 @@ export const fetchBasket = createAsyncThunk(
         }
     }
 )
+
+
+
+
+// export const fetchUser = createAsyncThunk(
+//     'user/fetchUser',
+//     async (_, thunkAPI) => {
+//         try {
+//             const {data} = await axios.get<any>('http://localhost:5000/api/user/')
+//          //   await localStorage.setItem('token', data.token)
+//             return {
+//                 user: jwt_decode(data.token),
+//                 token: data.token
+//             }
+//         } catch (e) {
+//             return thunkAPI.rejectWithValue('Не удалось загрузить пользователя')
+//         }
+//     }
+// )

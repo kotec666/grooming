@@ -13,7 +13,6 @@ class BasketToysController {
 
     async deleteOne(req, res, next) {
         try {
-
             const {basketId, toyId} = req.body
 
             const basketToys = await BasketToy.findAll({

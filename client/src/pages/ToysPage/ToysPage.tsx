@@ -6,7 +6,7 @@ import {toyAPI} from "../../servicesAPI/ToysService"
 
 const ToysPage = () => {
 
-    const [limit, setLimit] = useState(6)
+    const [limit] = useState(6)
     const {data: toys, isLoading, isError} = toyAPI.useFetchAllToysQuery(limit)
 
     return (

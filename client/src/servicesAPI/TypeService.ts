@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react"
-import {IServices, IType} from "../models/IServices"
+import {ICreateTypeReq, ICreateTypeRes, IServices, IServicesData, IServicesDataReq, IType} from "../models/IServices"
 
 
 export const serviceAPI = createApi({
@@ -16,11 +16,14 @@ export const serviceAPI = createApi({
             }),
             providesTags: result => ['Service']
         }),
-        createType: build.mutation<IType, IType>({
+        createType: build.mutation<ICreateTypeRes, ICreateTypeReq>({
             query: (type) => ({
                 url: `/type`,
                 method: 'POST',
-                body: type
+                body: type,
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
             }),
             invalidatesTags: ['Service']
         }),
@@ -28,6 +31,30 @@ export const serviceAPI = createApi({
             query: (type) => ({
                 url: `/type/${type.id}`,
                 method: 'DELETE',
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            }),
+            invalidatesTags: ['Service']
+        }),
+        createService: build.mutation<IServicesData, IServicesDataReq>({
+            query: (service) => ({
+                url: `/service`,
+                method: 'POST',
+                body: service,
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            }),
+            invalidatesTags: ['Service']
+        }),
+        deleteService: build.mutation<IServicesData, IServicesData>({
+            query: (service) => ({
+                url: `/service/${service.id}`,
+                method: 'DELETE',
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
             }),
             invalidatesTags: ['Service']
         }),

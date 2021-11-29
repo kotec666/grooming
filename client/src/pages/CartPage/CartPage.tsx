@@ -7,7 +7,7 @@ import {basketAPI} from "../../servicesAPI/BasketService"
 
 const CartPage = () => {
 
-    const [userId, setUserId] = useState(3)
+    const [userId] = useState(3)
     const {data: basket, isLoading, isError} = basketAPI.useFetchAllBasketByIdQuery(userId)
 
     return (

@@ -1,6 +1,11 @@
 
-export interface IBasketService {
+export interface IBasketServiceReq {
+    serviceId: number
+    basketId: number
+}
+
+export interface IBasketServiceRes {
     id: number
-    service_id: number
-    basket_id: number
+    serviceId: number
+    basketId: number
 }

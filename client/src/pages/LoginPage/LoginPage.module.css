@@ -44,6 +44,9 @@
     color: rgba(0, 0, 0, 0.5);
 }
 
+.form__wrapper span {
+    color: rgb(255, 0, 0);
+}
 
 .btn__wrapper {
 
@@ -65,4 +68,5 @@
     line-height: 23px;
     padding: 10px 10px 10px 10px;
     color: #FFFFFF;
+    cursor: pointer;
 }

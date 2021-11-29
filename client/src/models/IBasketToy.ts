@@ -1,6 +1,11 @@
 
-export interface IBasketToy {
+export interface IBasketToyRes {
+    toyId: number
+    basketId: number
+}
+
+export interface IBasketToyReq {
     id: number
-    toy_id: number
-    basket_id: number
+    toyId: number
+    basketId: number
 }

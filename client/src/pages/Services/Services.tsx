@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import s from './Services.module.css'
 import TypeItem from "../../components/TypeItem"
 import {serviceAPI} from "../../servicesAPI/TypeService"
-import {IType} from "../../models/IServices"
 
 
 // import {useAppDispatch, useAppSelector,} from "../../hooks/redux"
@@ -10,41 +9,27 @@ import {IType} from "../../models/IServices"
 
 
 const Services = () => {
-    const [limit, setLimit] = useState(3)
+    const [limit] = useState(3)
     const {data: services, isLoading, isError} = serviceAPI.useFetchAllServicesQuery(limit)
 
 
-    const [createType, {}] = serviceAPI.useCreateTypeMutation()
-    const [deleteType, {}] = serviceAPI.useDeleteTypeMutation()
+    // const [createType, {}] = serviceAPI.useCreateTypeMutation()
+    // const [deleteType, {}] = serviceAPI.useDeleteTypeMutation()
 
-
-    const handleCreate = async () => {
-             const name = prompt()
-             await createType({name} as IType)
-         }
-
-    const handleRemove = (type: IType) => {
-            deleteType(type)
-         }
 
     // const handleCreate = async () => {
-    //     const title = prompt()
-    //     await createPost({title, body: title} as IPost)
-    // }
+    //          const name = prompt()
+    //          await createType({name} as IType)
+    //      }
     //
-    // const handleRemove = (post: IPost) => {
-    //     deletePost(post)
-    // }
-    //
-    // const handleUpdate = (post: IPost) => {
-    //     updatePost(post)
-    // }
+    // const handleRemove = (type: IType) => {
+    //         deleteType(type)
+    //      }
 
-  // const dispatch = useAppDispatch()
   //  const {services, isLoading, error} = useAppSelector(state => state.servicesReducer)
 
     useEffect(() => {
-      //  dispatch(fetchServices())
+
         // eslint-disable-next-line
     }, [])
 

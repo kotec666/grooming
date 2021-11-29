@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react"
 import {IBasket} from "../models/IBasket"
-import {IBasketToy} from "../models/IBasketToy"
-import {IBasketService} from "../models/IBasketService"
+import {IBasketToyReq, IBasketToyRes} from "../models/IBasketToy"
+import {IBasketServiceReq, IBasketServiceRes} from "../models/IBasketService"
 
 
 export const basketAPI = createApi({
@@ -15,7 +15,7 @@ export const basketAPI = createApi({
             }),
             providesTags: result => ['Basket']
         }),
-        createBasketToy: build.mutation<IBasketToy, IBasketToy>({
+        createBasketToy: build.mutation<IBasketToyReq, IBasketToyRes>({
             query: (toy) => ({
                 url: `/basketToys`,
                 method: 'POST',
@@ -23,7 +23,7 @@ export const basketAPI = createApi({
             }),
             invalidatesTags: ['Basket']
         }),
-        createBasketService: build.mutation<IBasketService, IBasketService>({
+        createBasketService: build.mutation<IBasketServiceReq, IBasketServiceRes>({
             query: (service) => ({
                 url: `/basketServices`,
                 method: 'POST',
@@ -31,17 +31,19 @@ export const basketAPI = createApi({
             }),
             invalidatesTags: ['Basket']
         }),
-        deleteBasketToy: build.mutation<IBasketToy, IBasketToy>({
+        deleteBasketToy: build.mutation<IBasketToyRes, IBasketToyRes>({
             query: (toy) => ({
-                url: `/basketToys/${toy.id}`,
+                url: `/basketToys`,
                 method: 'DELETE',
+                body: toy //toy_id, basket_id
             }),
             invalidatesTags: ['Basket']
         }),
-        deleteBasketService: build.mutation<IBasketService, IBasketService>({
+        deleteBasketService: build.mutation<IBasketServiceReq, IBasketServiceRes>({
             query: (service) => ({
-                url: `/basketServices/${service.id}`,
+                url: `/basketServices`,
                 method: 'DELETE',
+                body: service //service_id, basket_id
             }),
             invalidatesTags: ['Basket']
         }),

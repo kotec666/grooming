@@ -13,3 +13,12 @@ export interface IToy {
     createdAt: string
     updatedAt: string
 }
+
+
+export interface ICreateToyReq {
+    name: string
+    price: number
+    img: string
+}
+
+
