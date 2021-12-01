@@ -2,7 +2,6 @@ import axios from "axios"
 import {IServices} from "../../models/IServices"
 import {createAsyncThunk} from "@reduxjs/toolkit"
 import {IToys} from "../../models/IToys"
-import {IBasket} from "../../models/IBasket"
 
 
 // export const fetchServices = () => async (dispatch: AppDispatch) => {
@@ -45,17 +44,17 @@ export const fetchToys = createAsyncThunk(
 
 
 
-export const fetchBasket = createAsyncThunk(
-    'basket/fetchAllById',
-    async (_, thunkAPI) => {
-        try {
-            const response = await axios.get<IBasket>(`http://localhost:5000/api/basket/`)
-            return response.data
-        } catch (e) {
-            return thunkAPI.rejectWithValue('Не удалось загрузить корзину')
-        }
-    }
-)
+//export const fetchBasket = createAsyncThunk(
+//    'basket/fetchAllById',
+//    async (_, thunkAPI) => {
+//        try {
+//            const response = await axios.get<IBasket>(`http://localhost:5000/api/basket/`)
+//            return response.data
+//        } catch (e) {
+//            return thunkAPI.rejectWithValue('Не удалось загрузить корзину')
+//        }
+//    }
+//)
 
 
 

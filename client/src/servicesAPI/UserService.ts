@@ -1,6 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react"
 import {
-    ICheckUserReq,
     ICheckUserRes,
     ILoginUserReq,
     ILoginUserRes,

@@ -13,7 +13,7 @@ interface ToysState {
 const initialState: ToysState = {
     toys: {count:0, rows:[]},
     isLoading: false,
-    error: ''
+    error: '',
 }
 
 

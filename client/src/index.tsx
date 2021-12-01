@@ -7,13 +7,14 @@ import * as serviceWorker from './serviceWorker'
 import {BrowserRouter} from "react-router-dom"
 import {setupStore} from "./store/store"
 
+
 const store = setupStore()
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
         <BrowserRouter>
-            <App />
+                <App />
         </BrowserRouter>
     </Provider>
   </React.StrictMode>,

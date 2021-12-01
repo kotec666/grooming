@@ -1,37 +1,31 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import s from './Services.module.css'
 import TypeItem from "../../components/TypeItem"
 import {serviceAPI} from "../../servicesAPI/TypeService"
+import {toyAPI} from "../../servicesAPI/ToysService";
 
 
-// import {useAppDispatch, useAppSelector,} from "../../hooks/redux"
-// import {fetchServices} from "../../store/reducers/ActionCreators"
 
 
 const Services = () => {
-    const [limit] = useState(3)
-    const {data: services, isLoading, isError} = serviceAPI.useFetchAllServicesQuery(limit)
+    const pageSize = 2
 
+    const [page, setPage] = useState(1)
+    const { data: services, isLoading, isError } = serviceAPI.useFetchAllServicesQuery({limit: pageSize, page})
 
-    // const [createType, {}] = serviceAPI.useCreateTypeMutation()
-    // const [deleteType, {}] = serviceAPI.useDeleteTypeMutation()
+    let servicesCount = 1
+    if (services) {
+        servicesCount = services.count
+    }
 
+    const totalCount = servicesCount
 
-    // const handleCreate = async () => {
-    //          const name = prompt()
-    //          await createType({name} as IType)
-    //      }
-    //
-    // const handleRemove = (type: IType) => {
-    //         deleteType(type)
-    //      }
+    const calculatePagesCount = (pageSize:number, totalCount:number) => {
+        return totalCount < pageSize ? 1 : Math.ceil(totalCount / pageSize)
+    }
 
-  //  const {services, isLoading, error} = useAppSelector(state => state.servicesReducer)
+    const pagesCount = calculatePagesCount(pageSize, totalCount)
 
-    useEffect(() => {
-
-        // eslint-disable-next-line
-    }, [])
 
     return (
         <div>
@@ -45,6 +39,23 @@ const Services = () => {
                             })
                         }
                         { isError && <h1>Произошла ошибка при загрузке</h1> }
+                        <div style={{display:'flex'}}>
+                            <button
+                                onClick={() => setPage(page - 1)}
+                                disabled={page === 1}
+                            >
+                                ←
+                            </button>
+                            <h3>
+                                {page}/{pagesCount - 1}
+                            </h3>
+                            <button
+                                onClick={() => setPage(page + 1)}
+                                disabled={page === pagesCount - 1}
+                            >
+                                →
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -53,3 +64,19 @@ const Services = () => {
 }
 
 export default Services
+
+
+// const [createType, {}] = serviceAPI.useCreateTypeMutation()
+// const [deleteType, {}] = serviceAPI.useDeleteTypeMutation()
+
+
+// const handleCreate = async () => {
+//          const name = prompt()
+//          await createType({name} as IType)
+//      }
+//
+// const handleRemove = (type: IType) => {
+//         deleteType(type)
+//      }
+
+//  const {services, isLoading, error} = useAppSelector(state => state.servicesReducer)

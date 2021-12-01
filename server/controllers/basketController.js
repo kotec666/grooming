@@ -9,14 +9,13 @@ const ApiError = require('./../error/ApiError')
 
 class BasketController {
 
-
     async getOne(req, res, next) {
         try {
             const {id} = req.params
 
             const basket = await Basket.findOne(
                 {
-                    where: {id},
+                    where: {userId: id},
                     include: [
                         {model: Service, through: BasketService},
                         {model: Toy, through: BasketToy},
@@ -29,6 +28,7 @@ class BasketController {
             next(ApiError.badRequest(e.message))
         }
     }
+
 
 //убрать create метод, создание будет из разных контроллеров
     // async create(req, res, next) {

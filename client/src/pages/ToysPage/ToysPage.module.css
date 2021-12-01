@@ -104,3 +104,22 @@
 
 
 }
+
+
+.basketButton {
+    transition: .7s;
+}
+
+.basketButton:hover {
+    transition: .7s;
+    background-color: #FF6B7F;
+}
+
+.toyPageButton {
+    transition: .7s;
+}
+
+.toyPageButton:hover {
+    transition: .7s;
+    background-color: #6bcb54;
+}

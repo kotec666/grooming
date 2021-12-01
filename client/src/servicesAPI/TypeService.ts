@@ -7,13 +7,8 @@ export const serviceAPI = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000/api/'}),
     tagTypes: ['Service'],
     endpoints: (build) => ({
-        fetchAllServices: build.query<IServices, number>({
-            query: (limit: number = 3) => ({
-                url: `/type`,
-                params: {
-                    _limit: limit
-                }
-            }),
+        fetchAllServices: build.query<IServices, { limit: number, page: number }>({
+            query: ({limit, page}) => `type/?_limit=${limit}&page=${page}`,
             providesTags: result => ['Service']
         }),
         createType: build.mutation<ICreateTypeRes, ICreateTypeReq>({

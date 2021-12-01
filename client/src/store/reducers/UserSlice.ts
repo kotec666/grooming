@@ -2,8 +2,6 @@ import {createSlice} from "@reduxjs/toolkit"
 import {IUser} from "../../models/IUser"
 import jwt_decode from "jwt-decode"
 import {userAPI} from "../../servicesAPI/UserService"
-import {RootState} from "../store"
-
 
 
 interface UserState {

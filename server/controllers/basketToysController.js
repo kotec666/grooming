@@ -23,7 +23,7 @@ class BasketToysController {
             })
             const toy = basketToys[0]
             await toy.destroy()
-            res.status(204).json({})
+            res.json()
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }

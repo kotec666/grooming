@@ -25,9 +25,9 @@ class BasketServicesController {
                     serviceId
                 }
             })
-            const service = basketServices[0]
-            await service.destroy()
-            res.status(204).json({})
+             const service = basketServices[0]
+             await service.destroy()
+            res.json()
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }

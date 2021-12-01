@@ -14,7 +14,7 @@ import {
 import {useAppSelector} from "../../hooks/redux"
 
 const Navbar = () => {
-    const {isAuth} = useAppSelector(state => state.userReducer)
+    const {user, isAuth} = useAppSelector(state => state.userReducer)
     return (
         <div className={s.wrapper}>
             <Link to='/' className={s.logo__wrapper}>
@@ -25,11 +25,14 @@ const Navbar = () => {
                 isAuth && isAuth
                     ?
                     <>
-                        <NavLink to={CART_ROUTE} activeClassName={s.link__active}>Корзина</NavLink>
-                        <NavLink to={PROFILE_ROUTE} activeClassName={s.link__active}>Профиль</NavLink>
-                        <NavLink to={ADMIN_ROUTE} activeClassName={s.link__active}>Админ</NavLink>
                         <NavLink to={SERVICES_ROUTE}  activeClassName={s.link__active}>Услуги</NavLink>
                         <NavLink to={TOYS_ROUTE} activeClassName={s.link__active}>Игрушки</NavLink>
+                        <NavLink to={CART_ROUTE} activeClassName={s.link__active}>Корзина</NavLink>
+                        <NavLink to={PROFILE_ROUTE} activeClassName={s.link__active}>Профиль</NavLink>
+                        {
+                            user.role === 'ADMIN' ?
+                                <NavLink to={ADMIN_ROUTE} activeClassName={s.link__active}>Админ</NavLink> : null
+                        }
                     </>
                     :
                     <>

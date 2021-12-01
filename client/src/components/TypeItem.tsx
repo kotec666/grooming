@@ -1,6 +1,9 @@
 import React from 'react'
 import s from './../pages/Services/Services.module.css'
 import {IServicesData} from "../models/IServices"
+import {useAppSelector} from "../hooks/redux"
+import {basketAPI} from "../servicesAPI/BasketService"
+import {IBasketServiceReq} from "../models/IBasketService"
 
 
 interface ITypeItemProps {
@@ -12,10 +15,23 @@ interface ITypeItemProps {
 
 const TypeItem:React.FC<ITypeItemProps> = ({id, name, servicesData}) => {
 
-    const basketId = 1
 
-    const addServiceToCartHandler = (serviceId:number, basketId:number) => {
-        console.log(serviceId, basketId)
+    const {user} = useAppSelector(state => state.userReducer)
+    const {data: basket} = basketAPI.useFetchAllBasketByIdQuery(user.id)
+    const [createBasketService, {}] = basketAPI.useCreateBasketServiceMutation()
+
+    const addServiceToCartHandler = async (serviceId:number) => {
+        if (basket) {
+            const basketId = basket.id
+            await createBasketService({serviceId, basketId} as IBasketServiceReq).unwrap()
+        }
+    }
+
+
+    const isItemAdded = (id:number) => {
+        if (basket) {
+            return basket.services.some((obj) => Number(obj.id) === Number(id))
+        }
     }
 
 
@@ -42,7 +58,12 @@ const TypeItem:React.FC<ITypeItemProps> = ({id, name, servicesData}) => {
                                                 <h4>
                                                     Стоимость: {serviceData.price} руб.
                                                 </h4>
-                                                <button onClick={() => addServiceToCartHandler(serviceData.id, basketId)}>Заказать услугу</button>
+                                                {
+                                                    isItemAdded(serviceData.id) ?
+                                                        <button style={{backgroundColor: '#6bcb54'}}>Добавлено</button>
+                                                        :
+                                                        <button onClick={() => addServiceToCartHandler(serviceData.id)} className={s.servicePageButton}>Заказать услугу</button>
+                                                }
                                             </div>
                                         </div>
                                     </div>

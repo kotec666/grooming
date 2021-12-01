@@ -2,18 +2,14 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react"
 import {IToys, IToy, ICreateToyReq} from "../models/IToys"
 
 
+
 export const toyAPI = createApi({
     reducerPath: 'toyAPI',
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:5000/api/'}),
     tagTypes: ['Toys'],
     endpoints: (build) => ({
-        fetchAllToys: build.query<IToys, number>({
-            query: (limit: number = 6) => ({
-                url: `/toy`,
-                params: {
-                    _limit: limit
-                }
-            }),
+        fetchAllToys: build.query<IToys, {limit: number; page:number}>({
+            query: ({limit, page}) => `toy/?_limit=${limit}&page=${page}`,
             providesTags: result => ['Toys']
         }),
         createToy: build.mutation<IToy, ICreateToyReq>({

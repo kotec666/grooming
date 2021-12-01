@@ -135,7 +135,6 @@
 }
 
 
-
 .service__price__wrapper button {
     border: none;
     outline: none;
@@ -149,4 +148,13 @@
     border-radius: 5px;
     cursor: pointer;
     margin: 1% 1% 1% 1%;
+}
+
+.servicePageButton {
+    transition: .7s;
+}
+
+.servicePageButton:hover {
+    transition: .7s;
+    background-color: #6bcb54;
 }

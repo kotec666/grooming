@@ -10,12 +10,12 @@ export const basketAPI = createApi({
     tagTypes: ['Basket'],
     endpoints: (build) => ({
         fetchAllBasketById: build.query<IBasket, number>({
-            query: (id: number = 3) => ({
+            query: (id: number) => ({
                 url: `/basket/${id}`,
             }),
             providesTags: result => ['Basket']
         }),
-        createBasketToy: build.mutation<IBasketToyReq, IBasketToyRes>({
+        createBasketToy: build.mutation<IBasketToyRes, IBasketToyReq>({
             query: (toy) => ({
                 url: `/basketToys`,
                 method: 'POST',
@@ -23,7 +23,7 @@ export const basketAPI = createApi({
             }),
             invalidatesTags: ['Basket']
         }),
-        createBasketService: build.mutation<IBasketServiceReq, IBasketServiceRes>({
+        createBasketService: build.mutation<IBasketServiceRes, IBasketServiceReq>({
             query: (service) => ({
                 url: `/basketServices`,
                 method: 'POST',
@@ -31,7 +31,7 @@ export const basketAPI = createApi({
             }),
             invalidatesTags: ['Basket']
         }),
-        deleteBasketToy: build.mutation<IBasketToyRes, IBasketToyRes>({
+        deleteBasketToy: build.mutation<IBasketToyRes, IBasketToyReq>({
             query: (toy) => ({
                 url: `/basketToys`,
                 method: 'DELETE',
@@ -39,7 +39,7 @@ export const basketAPI = createApi({
             }),
             invalidatesTags: ['Basket']
         }),
-        deleteBasketService: build.mutation<IBasketServiceReq, IBasketServiceRes>({
+        deleteBasketService: build.mutation<IBasketServiceRes, IBasketServiceReq>({
             query: (service) => ({
                 url: `/basketServices`,
                 method: 'DELETE',
