@@ -4,20 +4,19 @@ import {userAPI} from "../../servicesAPI/UserService"
 import {ILoginUserReq, IRegistrationUserReq} from "../../models/IUser"
 import {useHistory} from "react-router-dom"
 import {TOYS_ROUTE} from "../../utils/consts"
+import {useForm} from "react-hook-form"
 
 const RegistrationPage = () => {
 
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
     const [regError, setRegError] = useState('')
 
     const history = useHistory()
     const [registrationUser, {}] = userAPI.useRegistrationUserMutation()
     const [loginUser, {}] = userAPI.useLoginUserMutation()
 
-    const handleRegistrationUser = async () => {
+    const {register: registerRegistration, formState: { errors: errorsRegistration }, handleSubmit: handleSubmitRegistration} = useForm<IRegistrationUserReq>()
+
+    const handleRegistrationUser = handleSubmitRegistration( async ({login, password, email, phone}) => {
         try {
             setRegError('')
             const role = 'USER'
@@ -27,19 +26,97 @@ const RegistrationPage = () => {
         } catch (e) {
             setRegError(e.data.message)
         }
-    }
+    })
 
     return (
         <div className={s.login__wrapper}>
             <div className={s.form__wrapper}>
-                <span>{regError}</span>
-                <input type="text" placeholder="Логин..." value={login} onChange={event => setLogin(event.target.value)}/>
-                <input type="password" placeholder="Пароль..." value={password} onChange={event => setPassword(event.target.value)}/>
-                <input type="email" placeholder="Email..." value={email} onChange={event => setEmail(event.target.value)}/>
-                <input type="phone" placeholder="Номер телефона..." value={phone} onChange={event => setPhone(event.target.value)}/>
-                <div className={s.btn__wrapper}>
-                    <button onClick={handleRegistrationUser}>Регистрация</button>
-                </div>
+                <form onSubmit={handleRegistrationUser}>
+                    <span>{regError}</span>
+                    <input
+                        type="text"
+                        placeholder="Логин..."
+                        {...registerRegistration("login", {
+                            required: "Поле обязательно для заполнения",
+                            minLength: {
+                                value: 4,
+                                message: 'Минимум 4 символа'
+                            },
+                            maxLength: {
+                                value: 40,
+                                message: 'Максимум 40 символов'
+                            }
+                        })}
+                    />
+                    {
+                        errorsRegistration?.login &&
+                        <div style={{color:'red'}}>
+                            {errorsRegistration?.login.message}
+                        </div>
+                    }
+                    <input
+                        type="password"
+                        placeholder="Пароль..."
+                        {...registerRegistration("password", {
+                            required: "Поле обязательно для заполнения",
+                            minLength: {
+                                value: 4,
+                                message: 'Минимум 4 символа'
+                            },
+                            maxLength: {
+                                value: 40,
+                                message: 'Максимум 40 символов'
+                            }
+                        })}
+                    />
+                    {
+                        errorsRegistration?.password &&
+                        <div style={{color:'red'}}>
+                            {errorsRegistration?.password.message}
+                        </div>
+                    }
+                    <input
+                        type="text"
+                        placeholder="Email..."
+                        {...registerRegistration("email", {
+                            required: "Поле обязательно для заполнения",
+                            pattern: {
+                                value: /\S+@\S+\.\S+/,
+                                message: "Введенное значение не соответствует формату email"
+                            }
+                        })}
+                    />
+                    {
+                        errorsRegistration?.email &&
+                        <div style={{color:'red'}}>
+                            {errorsRegistration?.email.message}
+                        </div>
+                    }
+                    <input
+                        type="phone"
+                        placeholder="Номер телефона..."
+                        {...registerRegistration("phone", {
+                            required: "Поле обязательно для заполнения",
+                            minLength: {
+                                value: 7,
+                                message: 'Минимум 7 символов'
+                            },
+                            maxLength: {
+                                value: 30,
+                                message: 'Максимум 30 символов'
+                            }
+                        })}
+                    />
+                    {
+                        errorsRegistration?.phone &&
+                        <div style={{color:'red'}}>
+                            {errorsRegistration?.phone.message}
+                        </div>
+                    }
+                    <div className={s.btn__wrapper}>
+                        <button type="submit">Регистрация</button>
+                    </div>
+                </form>
             </div>
         </div>
     )

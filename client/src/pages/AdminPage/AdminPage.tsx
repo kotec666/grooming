@@ -3,27 +3,24 @@ import s from "./AdminPage.module.css"
 import Modal from "../../components/Modal/Modal"
 import {serviceAPI} from "../../servicesAPI/TypeService"
 import {toyAPI} from "../../servicesAPI/ToysService"
+import {useForm} from "react-hook-form"
 
 
-
-const initialTypeState = {
-    name: ''
+type Type = {
+    name: string
 }
 
-
-const initialServiceState = {
-    name: '',
-    description: '',
-    price: 1,
-    typeId: 1,
+type Service = {
+    name: string
+    description: string
+    price: number
+    typeId: number
 }
 
-const file: File = {} as File
-
-const initialToyState = {
-    name: '',
-    price: 0,
-    img: file
+type Toy = {
+    name: string
+    price: number
+    img: FileList
 }
 
 
@@ -36,45 +33,46 @@ const AdminPage = () => {
     const [isServiceOpened, setIsServiceOpened] = useState(false)
     const [isProductOpened, setIsProductOpened] = useState(false)
 
-    const [typeState, setTypeState] = useState(initialTypeState) // добавление типа услуги
-    const [serviceState, setServiceState] = useState(initialServiceState) // добавление услуги
-    const [toyState, setToyState] = useState(initialToyState) // добавление товара
-
     const [createType] = serviceAPI.useCreateTypeMutation()
     const [createService] = serviceAPI.useCreateServiceMutation()
     const [createToy] = toyAPI.useCreateToyMutation()
 
-    const addTypeHandler = async () => {
+    const {register: registerType, formState: { errors: errorsType }, handleSubmit: handleSubmitType} = useForm<Type>()
+    const {register: registerService, formState: { errors: errorsService }, handleSubmit: handleSubmitService} = useForm<Service>()
+    const {register: registerToy, formState: { errors: errorsToy }, handleSubmit: handleSubmitToy} = useForm<Toy>()
+
+
+    const addTypeHandler =  handleSubmitType( async (data) => {
         try {
-            await createType(typeState)
+            await createType(data)
             setIsTypeOpened(false)
         } catch (e) {
            console. log('произошла ошибка при создании типа')
         }
-    }
+    })
 
-    const addServiceHandler = async () => {
+    const addServiceHandler = handleSubmitService( async (data) => {
         try {
-           await createService(serviceState)
+           await createService(data)
            setIsServiceOpened(false)
         } catch (e) {
            console. log('произошла ошибка при создании услуги')
         }
 
-    }
+    })
 
-    const addToyHandler = async () => {
+    const addToyHandler = handleSubmitToy( async (data) => {
         try {
             const toyData = new FormData()
-            toyData.append('name', toyState.name)
-            toyData.append('price', `${toyState.price}`)
-            toyData.append('img', toyState.img)
+            toyData.append('name', data.name)
+            toyData.append('price', `${data.price}`)
+            toyData.append('img', data.img[0])
             await createToy(toyData)
             setIsProductOpened(false)
         } catch (e) {
             console.log('произошла ошибка при создании товара')
         }
-    }
+    })
 
     return (
         <div className={s.admin__page__wrapper}>
@@ -84,87 +82,178 @@ const AdminPage = () => {
                 <button onClick={() => setIsProductOpened(true)} className={s.openModalBtn}>Добавить новый товар</button>
 
                 <Modal isOpened={isTypeOpened} setIsOpened={setIsTypeOpened} title={'Добавление типа услуги'}>
-                    <input
-                        type="text"
-                        placeholder="Имя (для кого предназначена)"
-                        value={typeState.name}
-                        onChange={e => {
-                            setTypeState({ ...typeState, name: e.target.value })
-                        }}
-                    />
-                    <button onClick={addTypeHandler} className={s.applyBtn}>Добавить</button>
+                    <form onSubmit={addTypeHandler}>
+                        <input
+                         type="text"
+                         placeholder="Имя (для кого предназначена)"
+                         {...registerType("name", {
+                             required: "Поле обязательно для заполнения",
+                             minLength: {
+                                 value: 6,
+                                 message: 'Минимум 6 символов'
+                             },
+                             maxLength: {
+                                 value: 40,
+                                 message: 'Максимум 40 символов'
+                             }
+                         })}
+                        />
+                        {
+                            errorsType?.name &&
+                            <div style={{color:'red'}}>
+                                {errorsType?.name.message}
+                            </div>
+                        }
+                        <button type="submit" className={s.applyBtn}>Добавить</button>
+                    </form>
                 </Modal>
 
                 <Modal isOpened={isServiceOpened} setIsOpened={setIsServiceOpened} title={'Добавление услуги'}>
-                    <input
-                        type="text"
-                        placeholder="Название предоставляемой услуги"
-                        value={serviceState.name}
-                        onChange={e => {
-                        setServiceState({ ...serviceState, name: e.target.value })
-                        }}
-                    />
-                    <textarea
-                        placeholder="Описание производимых работ по услуге"
-                        value={serviceState.description}
-                        onChange={e => {
-                            setServiceState({ ...serviceState, description: e.target.value })
-                        }}
-                    />
-                    <input
-                        type="number"
-                        placeholder="Цена за услугу"
-                        value={serviceState.price}
-                        onChange={e => {
-                            setServiceState({ ...serviceState, price: +e.target.value })
-                        }}
-                        min={1} max={999999}
-                    />
-                    <select
-                        value={serviceState.typeId}
-                        onChange={e => {
-                            setServiceState({ ...serviceState, typeId: +e.target.value })
-                        }}
-                    >
+                    <form onSubmit={addServiceHandler}>
+                        <input
+                            type="text"
+                            placeholder="Название предоставляемой услуги"
+                            {...registerService("name", {
+                                required: "Поле обязательно для заполнения",
+                                minLength: {
+                                    value: 6,
+                                    message: 'Минимум 6 символов'
+                                },
+                                maxLength: {
+                                    value: 40,
+                                    message: 'Максимум 40 символов'
+                                }
+                            })}
+                        />
                         {
-                             services && services.rows.map(service => {
-                                return <option key={service.id} value={service.id}>{service.name}</option>
-                            })
+                            errorsService?.name &&
+                            <div style={{color:'red'}}>
+                                {errorsService?.name.message}
+                            </div>
                         }
-                    </select>
-                    <button onClick={addServiceHandler} className={s.applyBtn}>Добавить</button>
+                     <textarea
+                            placeholder="Описание производимых работ по услуге"
+                            {...registerService("description", {
+                                required: "Поле обязательно для заполнения",
+                                minLength: {
+                                    value: 6,
+                                    message: 'Минимум 6 символов'
+                                },
+                                maxLength: {
+                                    value: 400,
+                                    message: 'Максимум 400 символов'
+                                }
+                            })}
+                     />
+                        {
+                            errorsService?.description &&
+                            <div style={{color:'red'}}>
+                                {errorsService?.description.message}
+                            </div>
+                        }
+                     <input
+                         type="number"
+                         placeholder="Цена за услугу"
+                         {...registerService("price", {
+                             required: "Поле обязательно для заполнения",
+                             minLength: {
+                                 value: 2,
+                                 message: 'Минимум 2 символа'
+                             },
+                             maxLength: {
+                                 value: 20,
+                                 message: 'Максимум 20 символов'
+                             }
+                         })}
+                     />
+                        {
+                            errorsService?.price &&
+                            <div style={{color:'red'}}>
+                                {errorsService?.price.message}
+                            </div>
+                        }
+                     <select
+                         {...registerService("typeId", {
+                             required: "Поле обязательно для заполнения",
+                         })}
+                      >
+                         {
+                             errorsService?.typeId &&
+                             <div style={{color:'red'}}>
+                                 {errorsService?.typeId.message}
+                             </div>
+                         }
+                          {
+                               services && services.rows.map(service => {
+                                 return <option key={service.id} value={service.id}>{service.name}</option>
+                              })
+                         }
+                      </select>
+                        <button type="submit" className={s.applyBtn}>Добавить</button>
+                    </form>
                 </Modal>
 
                 <Modal isOpened={isProductOpened} setIsOpened={setIsProductOpened} title={'Добавление товара (игрушки)'}>
+                <form onSubmit={addToyHandler}>
                     <input
                         type="text"
                         placeholder={'Название игрушки'}
-                        value={toyState.name}
-                        onChange={e => {
-                            setToyState({ ...toyState, name: e.target.value })
-                        }}
+                        {...registerToy("name", {
+                            required: "Поле обязательно для заполнения",
+                            minLength: {
+                                value: 6,
+                                message: 'Минимум 6 символов'
+                            },
+                            maxLength: {
+                                value: 20,
+                                message: 'Максимум 30 символов'
+                            }
+                        })}
                     />
+                    {
+                        errorsToy?.name &&
+                        <div style={{color:'red'}}>
+                            {errorsToy?.name.message}
+                        </div>
+                    }
                     <input
                         type="number"
                         placeholder={'Цена игрушки'}
-                        value={toyState.price}
-                        onChange={e => {
-                            setToyState({ ...toyState, price: +e.target.value })
-                        }}
+                        {...registerToy("price", {
+                            required: "Поле обязательно для заполнения",
+                            minLength: {
+                                value: 2,
+                                message: 'Минимум 2 символа'
+                            },
+                            maxLength: {
+                                value: 20,
+                                message: 'Максимум 20 символов'
+                            }
+                        })}
                     />
-                    <label className={s.choosePhotoBtn} htmlFor={'photo'}>Выберите фото игрушки</label>
+                    {
+                        errorsToy?.price &&
+                        <div style={{color:'red'}}>
+                            {errorsToy?.price.message}
+                        </div>
+                    }
+                    <label className={s.choosePhotoBtn} htmlFor={'img'}>Выберите фото игрушки</label>
                     <input
                         hidden
                         type="file"
-                        id={'photo'}
-                        onChange={e => {
-                            if (e.target.files) {
-                                setToyState({ ...toyState, img: e?.target?.files[0] })
-                            }
-                        }}
-
+                        id={'img'}
+                        {...registerToy("img", {
+                            required: "Поле изображения обязательно для заполнения"
+                        })}
                     />
-                    <button onClick={addToyHandler} className={s.applyBtn}>Добавить</button>
+                    {
+                        errorsToy?.img &&
+                        <div style={{color:'red'}}>
+                            {errorsToy?.img.message}
+                        </div>
+                    }
+                    <button type="submit" className={s.applyBtn}>Добавить</button>
+                </form>
                 </Modal>
             </div>
         </div>

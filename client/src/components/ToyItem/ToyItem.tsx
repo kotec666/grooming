@@ -4,7 +4,7 @@ import {useAppSelector} from "../../hooks/redux"
 import {basketAPI} from "../../servicesAPI/BasketService"
 import {IBasketToyReq} from "../../models/IBasketToy"
 import {isItemAdded} from "../../hooks/useIsAddedCheck"
-import {toyAPI} from "../../servicesAPI/ToysService";
+import {toyAPI} from "../../servicesAPI/ToysService"
 
 
 interface IToyItemProps {
@@ -54,6 +54,7 @@ const ToyItem:React.FC<IToyItemProps> = ({id, name, img, price, isBasket}) => {
                 </div>
                 <h4>{price} руб.</h4>
                 {
+                    isBasket ? null :
                     user.role === 'ADMIN' ?
                             <button className={s.basketButton} onClick={() => deleteToyFromWebsiteHandler(id)}>Удалить c сайта</button>
                             : null
@@ -65,10 +66,9 @@ const ToyItem:React.FC<IToyItemProps> = ({id, name, img, price, isBasket}) => {
                               ?
                               <button style={{backgroundColor: '#6bcb54'}}>Добавлено</button>
                               :
-                              isAuth ?
+                               isAuth ?
                               <button className={s.toyPageButton} onClick={() => addToyToCartHandler(id)}>В корзину</button>
                                   : null
-
                 }
             </div>
     )

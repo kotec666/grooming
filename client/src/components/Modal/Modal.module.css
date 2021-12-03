@@ -12,10 +12,11 @@
 }
 
 .modal__head {
-    width: 30%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2rem;
 }
 
 .modal__head span{
@@ -25,16 +26,19 @@
 
 /* Modal Content */
 .modal__content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    row-gap: 2rem;
     background-color: #fefefe;
     margin: auto;
     padding: 20px 20px 2rem;
     border: 1px solid #888;
     width: 50%;
+}
+
+.modal__content form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 2rem;
 }
 
 /* The Close Button */

@@ -4,18 +4,19 @@ import {userAPI} from "../../servicesAPI/UserService"
 import {ILoginUserReq} from "../../models/IUser"
 import { useHistory } from 'react-router-dom'
 import {TOYS_ROUTE} from "../../utils/consts"
+import {useForm} from "react-hook-form"
 
 
 const LoginPage = () => {
 
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
     const [loginError, setLoginError] = useState('')
 
     const history = useHistory()
     const [loginUser, {}] = userAPI.useLoginUserMutation()
 
-    const signIn = async () => {
+    const {register: registerLogin, formState: { errors: errorsLogin }, handleSubmit: handleSubmitLogin} = useForm<ILoginUserReq>()
+
+    const signIn = handleSubmitLogin( async ({login, password}) => {
         try {
             setLoginError('')
             await loginUser({login, password} as ILoginUserReq).unwrap()
@@ -23,18 +24,60 @@ const LoginPage = () => {
         } catch (e) {
             setLoginError(e.data.message)
         }
-    }
+    })
 
 
     return (
         <div className={s.login__wrapper}>
             <div className={s.form__wrapper}>
-                <span>{loginError}</span>
-                <input type="text" placeholder="Логин..." value={login} onChange={(event => setLogin(event.target.value))}/>
-                <input type="password" placeholder="Пароль..." value={password} onChange={(event => setPassword(event.target.value))}/>
-                <div className={s.btn__wrapper}>
-                    <button onClick={signIn}>Войти</button>
-                </div>
+                <form onSubmit={signIn}>
+                    <span>{loginError}</span>
+                    <input
+                        type="text"
+                        placeholder="Логин..."
+                        {...registerLogin("login", {
+                            required: "Поле обязательно для заполнения",
+                            minLength: {
+                                value: 4,
+                                message: 'Минимум 4 символа'
+                            },
+                            maxLength: {
+                                value: 40,
+                                message: 'Максимум 40 символов'
+                            }
+                        })}
+                    />
+                    {
+                        errorsLogin?.login &&
+                        <div style={{color:'red'}}>
+                            {errorsLogin?.login.message}
+                        </div>
+                    }
+                    <input
+                        type="password"
+                        placeholder="Пароль..."
+                        {...registerLogin("password", {
+                            required: "Поле обязательно для заполнения",
+                            minLength: {
+                                value: 4,
+                                message: 'Минимум 4 символа'
+                            },
+                            maxLength: {
+                                value: 40,
+                                message: 'Максимум 40 символов'
+                            }
+                        })}
+                    />
+                    {
+                        errorsLogin?.password &&
+                        <div style={{color:'red'}}>
+                            {errorsLogin?.password.message}
+                        </div>
+                    }
+                    <div className={s.btn__wrapper}>
+                        <button type="submit">Войти</button>
+                    </div>
+                </form>
             </div>
         </div>
     )

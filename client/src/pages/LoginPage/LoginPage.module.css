@@ -13,6 +13,10 @@
 }
 
 .form__wrapper {
+    width: 30%;
+}
+
+.form__wrapper form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,18 +30,17 @@
     border-radius: 10px;
 
     padding: 5% 0% 5% 0%;
-    width: 50%;
+    width: 100%;
     min-height: 407px;
-
     min-width: 200px;
 }
 
 .form__wrapper input {
-    width: 59%;
+    width: 70%;
     height: 74px;
     border: 1px solid #0067BA;
     border-radius: 10px;
-    padding-left: 10px;
+    padding-left: 5%;
     font-size: 25px;
     line-height: 29px;
 
