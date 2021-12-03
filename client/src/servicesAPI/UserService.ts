@@ -30,12 +30,12 @@ export const userAPI = createApi({
             }),
             invalidatesTags: ['User']
         }),
-        checkUser: build.query<ICheckUserRes, void>({
+        checkUser: build.query<ICheckUserRes, string|null>({
             query: () => ({
                 url: `/auth`,
                 method: 'GET',
                 headers: {
-                    'authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'authorization': `Bearer ${localStorage.getItem('token') || ''}`,
                 },
             }),
             providesTags: result => ['User']

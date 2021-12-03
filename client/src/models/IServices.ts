@@ -12,8 +12,6 @@ export interface IServicesDataReq {
     name: string
     description: string
     price: number
-    createdAt: string
-    updatedAt: string
     typeId: number
 }
 

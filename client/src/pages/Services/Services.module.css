@@ -56,7 +56,7 @@
     align-items: center;
     flex-wrap: wrap;
 
-    padding: 1% 0% 1% 1%;
+    padding: 1% 0 1% 1%;
 }
 
 .service__wrapper {
@@ -67,8 +67,8 @@
 
     max-width: 800px;
 
-    padding: 1% 0% 1% 1%;
-    margin: 5% 5% 0% 5%;
+    padding: 1% 0 1% 1%;
+    margin: 5% 5% 0 5%;
 }
 
 .service__wrapper h3 {
@@ -79,7 +79,7 @@
 
 
 .types__service__wrapper {
-    padding: 1% 0% 1% 1%;
+    padding: 1% 0 1% 1%;
 }
 
 .service__name__wrapper {
@@ -89,16 +89,16 @@
 
     background: #0098D9;
     border-radius: 10px;
-    padding: 1% 0% 1% 1%;
+    padding: 1% 0 1% 1%;
 
-    margin: 0% 5% 0% 2%;
+    margin: 0 5% 0 2%;
 }
 
 .service__name__wrapper h3 {
     font-size: 20px;
 
     color: #FFFFFF;
-    padding: 1% 0% 1% 1%;
+    padding: 1% 0 1% 1%;
 }
 
 .service__desc__wrapper {
@@ -106,10 +106,10 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 0% 0% 0% 5%;
+    padding: 0 0 0 5%;
     background: #FFFFFF;
 
-    margin: 0% 5% 0% 2%;
+    margin: 0 5% 0 2%;
 }
 
 .service__desc__wrapper h4 {
@@ -157,4 +157,51 @@
 .servicePageButton:hover {
     transition: .7s;
     background-color: #6bcb54;
+}
+
+.pButton {
+    height: 40px;
+    min-width: 40px;
+    border: 1px solid #00A2FA;
+    background-color: #FFFFFF;
+    transition: .5s;
+}
+
+.pButton:hover {
+    transition: .5s;
+    cursor: pointer;
+    transform: scale(1.1);
+    border: 1px solid #00A2FA;
+    background-color: #FFFFFF;
+}
+
+.firstBtn {
+    border-radius: 5px 0 0 5px;
+}
+
+.lastBtn {
+    border-radius: 0 5px 5px 0;
+}
+
+.deleteButton {
+    transition: .7s;
+}
+
+.deleteButton:hover {
+    transition: .7s;
+    background-color: #FF6B7F;
+}
+
+.close {
+    transition: .7s;
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #FF6B7F;
+    text-decoration: none;
+    cursor: pointer;
 }

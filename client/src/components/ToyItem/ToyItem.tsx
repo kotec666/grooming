@@ -3,6 +3,8 @@ import s from './../../pages/ToysPage/ToysPage.module.css'
 import {useAppSelector} from "../../hooks/redux"
 import {basketAPI} from "../../servicesAPI/BasketService"
 import {IBasketToyReq} from "../../models/IBasketToy"
+import {isItemAdded} from "../../hooks/useIsAddedCheck"
+import {toyAPI} from "../../servicesAPI/ToysService";
 
 
 interface IToyItemProps {
@@ -16,10 +18,11 @@ interface IToyItemProps {
 const ToyItem:React.FC<IToyItemProps> = ({id, name, img, price, isBasket}) => {
 
 
-    const {user} = useAppSelector(state => state.userReducer)
+    const {user, isAuth} = useAppSelector(state => state.userReducer)
     const {data: basket} = basketAPI.useFetchAllBasketByIdQuery(user.id)
     const [createBasketToy, {}] = basketAPI.useCreateBasketToyMutation()
     const [deleteBasketToy, {}] = basketAPI.useDeleteBasketToyMutation()
+    const [deleteToy] = toyAPI.useDeleteToyMutation()
 
     const addToyToCartHandler = async (toyId:number) => {
         if (basket) {
@@ -35,16 +38,14 @@ const ToyItem:React.FC<IToyItemProps> = ({id, name, img, price, isBasket}) => {
          }
     }
 
-    const isItemAdded = (id:number) => {
-        if (basket) {
-            return basket.toys.some((obj) => Number(obj.id) === Number(id))
-        }
+    const deleteToyFromWebsiteHandler = async (toyId:number) => {
+        await deleteToy(toyId).unwrap()
     }
 
 
     return (
             <div className={s.toy__wrapper}>
-                <h3>{name} id: {id}</h3>
+                <h3>{name}</h3>
                 <div className={s.img__wrapper}>
                     <img
                         src={'http://localhost:5000/' + img}
@@ -53,13 +54,20 @@ const ToyItem:React.FC<IToyItemProps> = ({id, name, img, price, isBasket}) => {
                 </div>
                 <h4>{price} руб.</h4>
                 {
-                  isBasket ?
+                    user.role === 'ADMIN' ?
+                            <button className={s.basketButton} onClick={() => deleteToyFromWebsiteHandler(id)}>Удалить c сайта</button>
+                            : null
+                }
+                {  isBasket ?
                       <button className={s.basketButton} onClick={() => deleteToyFromCartHandler(id)}>Удалить</button>
                       :
-                      isItemAdded(id) ?
+                      basket && isItemAdded(basket.toys, id)
+                              ?
                               <button style={{backgroundColor: '#6bcb54'}}>Добавлено</button>
                               :
+                              isAuth ?
                               <button className={s.toyPageButton} onClick={() => addToyToCartHandler(id)}>В корзину</button>
+                                  : null
 
                 }
             </div>

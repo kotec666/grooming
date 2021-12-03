@@ -12,24 +12,26 @@ interface IToyPaginationProps {
 const ToyPagination:React.FC<IToyPaginationProps> = ({pagesCount, page, setPage }) => {
 
 
+    const pages = []
+    if(pagesCount) {
+        for(let i = 0; i < pagesCount; i++)
+            pages.push(i)
+    }
+
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+        const target = event.target as Element
+        const newPage = Number(target.innerHTML)
+        if(newPage)
+            setPage(newPage)
+    }
 
     return (
-        <div className={s.toy__pagination__wrapper}>
-            <button
-                onClick={() => setPage(page - 1)}
-                disabled={page === 1}
-            >
-                ←
-            </button>
-            <h3>
-                {page}/{pagesCount}
-            </h3>
-            <button
-                onClick={() => setPage(page + 1)}
-                disabled={page === pagesCount}
-            >
-                →
-            </button>
+        <div style={{display:'flex'}}>
+            <button disabled={page === 1} onClick={() => setPage(1)} className={`${s.pButton} ${s.firstBtn}`}>Первая</button>
+                <button disabled={page === 1} onClick={() => setPage(page - 1)} className={s.pButton}>Предыдущая</button>
+                    {pages.map(elem => <button style={{backgroundColor: `${elem === page-1 ? '#00A2FA' : ''}`}} key={elem} onClick={handleClick} className={s.pButton}>{elem+1}</button>)}
+                <button disabled={page === pagesCount} onClick={() => setPage(page + 1)} className={s.pButton}>Следующая</button>
+            <button disabled={page === pagesCount} onClick={() => setPage(pagesCount)} className={`${s.pButton} ${s.lastBtn}`}>Последняя</button>
         </div>
     )
 }

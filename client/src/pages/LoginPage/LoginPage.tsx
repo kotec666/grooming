@@ -3,7 +3,7 @@ import s from './LoginPage.module.css'
 import {userAPI} from "../../servicesAPI/UserService"
 import {ILoginUserReq} from "../../models/IUser"
 import { useHistory } from 'react-router-dom'
-import {TOYS_ROUTE} from "../../utils/consts";
+import {TOYS_ROUTE} from "../../utils/consts"
 
 
 const LoginPage = () => {
@@ -14,7 +14,6 @@ const LoginPage = () => {
 
     const history = useHistory()
     const [loginUser, {}] = userAPI.useLoginUserMutation()
-   // const {token, user} = useAppSelector(state => state.userReducer)
 
     const signIn = async () => {
         try {

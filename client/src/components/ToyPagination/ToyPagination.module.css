@@ -38,3 +38,27 @@
     margin: 5% 5% 5% 5%;
     padding: 0% 5% 0% 5%;
 }
+
+.pButton {
+    height: 40px;
+    min-width: 40px;
+    border: 1px solid #00A2FA;
+    background-color: #FFFFFF;
+    transition: .5s;
+}
+
+.pButton:hover {
+    transition: .5s;
+    cursor: pointer;
+    transform: scale(1.1);
+    border: 1px solid #00A2FA;
+    background-color: #FFFFFF;
+}
+
+.firstBtn {
+    border-radius: 5px 0px 0px 5px;
+}
+
+.lastBtn {
+    border-radius: 0px 5px 5px 0px;
+}

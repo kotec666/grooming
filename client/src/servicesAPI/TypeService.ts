@@ -1,5 +1,12 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react"
-import {ICreateTypeReq, ICreateTypeRes, IServices, IServicesData, IServicesDataReq, IType} from "../models/IServices"
+import {
+    ICreateTypeReq,
+    ICreateTypeRes,
+    IServices,
+    IServicesData,
+    IServicesDataReq,
+    IType
+} from "../models/IServices"
 
 
 export const serviceAPI = createApi({
@@ -22,9 +29,9 @@ export const serviceAPI = createApi({
             }),
             invalidatesTags: ['Service']
         }),
-        deleteType: build.mutation<IType, IType>({
-            query: (type) => ({
-                url: `/type/${type.id}`,
+        deleteType: build.mutation<IType, number>({
+            query: (typeId) => ({
+                url: `/type/${typeId}`,
                 method: 'DELETE',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -43,9 +50,9 @@ export const serviceAPI = createApi({
             }),
             invalidatesTags: ['Service']
         }),
-        deleteService: build.mutation<IServicesData, IServicesData>({
-            query: (service) => ({
-                url: `/service/${service.id}`,
+        deleteService: build.mutation<IServicesData, number>({
+            query: (serviceId) => ({
+                url: `/service/${serviceId}`,
                 method: 'DELETE',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -53,28 +60,5 @@ export const serviceAPI = createApi({
             }),
             invalidatesTags: ['Service']
         }),
-        // createPost: build.mutation<IPost, IPost>({
-        //     query: (post) => ({
-        //         url: `/posts`,
-        //         method: 'POST',
-        //         body: post
-        //     }),
-        //     invalidatesTags: ['Post']
-        // }),
-        // updatePost: build.mutation<IPost, IPost>({
-        //     query: (post) => ({
-        //         url: `/posts/${post.id}`,
-        //         method: 'PUT',
-        //         body: post
-        //     }),
-        //     invalidatesTags: ['Post']
-        // }),
-        // deletePost: build.mutation<IPost, IPost>({
-        //     query: (post) => ({
-        //         url: `/posts/${post.id}`,
-        //         method: 'DELETE',
-        //     }),
-        //     invalidatesTags: ['Post']
-        // }),
     })
 })

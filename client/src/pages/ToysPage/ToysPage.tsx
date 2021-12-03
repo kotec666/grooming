@@ -3,13 +3,13 @@ import s from './ToysPage.module.css'
 import ToyItem from "../../components/ToyItem/ToyItem"
 import {toyAPI} from "../../servicesAPI/ToysService"
 import ToyPagination from "../../components/ToyPagination/ToyPagination"
-import {useAppSelector} from "../../hooks/redux";
+import {calculatePagesCount} from "../../hooks/usePagination"
 
 
 
 const ToysPage = () => {
 
-    const pageSize = 6 // limit query parameter ToysService
+    const pageSize = 6 // limit query parameter for ToysService
 
     const [page, setPage] = useState(1)
     const { data: toys, isLoading, isError } = toyAPI.useFetchAllToysQuery({limit: pageSize, page})
@@ -18,13 +18,7 @@ const ToysPage = () => {
     if (toys) {
         toysCount = toys.count
     }
-
     const totalCount = toysCount
-
-    const calculatePagesCount = (pageSize:number, totalCount:number) => {
-        return totalCount < pageSize ? 1 : Math.ceil(totalCount / pageSize)
-    }
-
     const pagesCount = calculatePagesCount(pageSize, totalCount)
 
 

@@ -5,11 +5,11 @@ import {userAPI} from "../../servicesAPI/UserService"
 
 
 interface UserState {
-    user: IUser
+    user: IUser | {id: 0, login: '', email: '', phone: '', role: ''}
     isLoading: boolean
     error: string,
     isAuth: boolean
-    token: string
+    token: string | null
 }
 
 
@@ -34,24 +34,6 @@ export const userSlice = createSlice({
             state.token = ''
         },
     },
-    // extraReducers: {
-    //     [fetchUser.fulfilled.type]: (state, action: PayloadAction<string>) => {
-    //         state.isLoading = false
-    //         state.error = ''
-    //         state.isAuth = true
-    //       // state.user = action.payload
-    //         state.token = action.payload
-    //
-    //     },
-    //     [fetchUser.pending.type]: (state) => {
-    //         state.isLoading = true
-    //     },
-    //     [fetchUser.rejected.type]: (state, action: PayloadAction<string>) => {
-    //         state.isLoading = false
-    //         state.error = action.payload
-    //         state.isAuth = false
-    //     },
-    // }
     extraReducers: (builder) => {
         builder.addMatcher(
             userAPI.endpoints.loginUser.matchFulfilled,
@@ -65,13 +47,10 @@ export const userSlice = createSlice({
         builder.addMatcher(
             userAPI.endpoints.checkUser.matchFulfilled,
             (state, { payload }) => {
-                state.isAuth = true
-                // @ts-ignore
-                state.token = payload.token
-                // @ts-ignore
-                state.user = jwt_decode(payload.token)
-                // @ts-ignore
-                localStorage.setItem('token', payload.token)
+                state.isAuth = payload !== null
+                state.token = payload !== null ? payload.token : ''
+                state.user = payload !== null ? payload.token ? jwt_decode(payload.token) : {id: 0, login: '', email: '', phone: '', role: ''} : {id: 0, login: '', email: '', phone: '', role: ''}
+                localStorage.setItem('token', payload !== null ? payload.token ? payload.token : '' : '')
             }
         )
 

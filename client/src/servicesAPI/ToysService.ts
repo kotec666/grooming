@@ -12,7 +12,7 @@ export const toyAPI = createApi({
             query: ({limit, page}) => `toy/?_limit=${limit}&page=${page}`,
             providesTags: result => ['Toys']
         }),
-        createToy: build.mutation<IToy, ICreateToyReq>({
+        createToy: build.mutation<IToy, FormData>({
             query: (toy) => ({
                 url: `/toy`,
                 method: 'POST',
@@ -23,9 +23,9 @@ export const toyAPI = createApi({
             }),
             invalidatesTags: ['Toys']
         }),
-        deleteToy: build.mutation<IToy, IToy>({
-            query: (toy) => ({
-                url: `/toy/${toy.id}`,
+        deleteToy: build.mutation<IToy, number>({
+            query: (toyId) => ({
+                url: `/toy/${toyId}`,
                 method: 'DELETE',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('token')}`,

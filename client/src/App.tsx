@@ -12,7 +12,7 @@ function App() {
     const [loading, setLoading] = useState(true)
     const [loginUser] = userAPI.useLoginUserMutation()
 
-    const {} = userAPI.useCheckUserQuery()
+    const {} = userAPI.useCheckUserQuery(null)
     const {user} = useAppSelector(state => state.userReducer)
     const {} = basketAPI.useFetchAllBasketByIdQuery(user.id)
 
