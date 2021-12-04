@@ -33,6 +33,11 @@ const AdminPage = () => {
     const [isServiceOpened, setIsServiceOpened] = useState(false)
     const [isProductOpened, setIsProductOpened] = useState(false)
 
+    const [drag, setDrag] = useState(false)
+    const [photoFile, setPhotoFile] = useState<FileList>()
+    const [photoError, setPhotoError] = useState('')
+    const [fileName, setFileName] = useState('')
+
     const [createType] = serviceAPI.useCreateTypeMutation()
     const [createService] = serviceAPI.useCreateServiceMutation()
     const [createToy] = toyAPI.useCreateToyMutation()
@@ -66,13 +71,35 @@ const AdminPage = () => {
             const toyData = new FormData()
             toyData.append('name', data.name)
             toyData.append('price', `${data.price}`)
-            toyData.append('img', data.img[0])
-            await createToy(toyData)
-            setIsProductOpened(false)
+            if (photoFile) {
+                toyData.append('img', photoFile[0])
+                await createToy(toyData)
+                setIsProductOpened(false)
+                setPhotoError('')
+            } else {
+                setPhotoError('Фото изображения товара обязательно')
+            }
         } catch (e) {
             console.log('произошла ошибка при создании товара')
         }
     })
+
+    const dragStartHandler = (e:React.DragEvent) => {
+        e.preventDefault()
+        setDrag(true)
+    }
+
+    const dragLeaveHandler = (e:React.DragEvent) => {
+        e.preventDefault()
+        setDrag(false)
+    }
+
+    const onDropHandler = (e:React.DragEvent) => {
+        e.preventDefault()
+        setPhotoFile([e.dataTransfer.files][0])
+        setFileName([e.dataTransfer.files][0][0].name)
+        setDrag(false)
+    }
 
     return (
         <div className={s.admin__page__wrapper}>
@@ -237,7 +264,7 @@ const AdminPage = () => {
                             {errorsToy?.price.message}
                         </div>
                     }
-                    <label className={s.choosePhotoBtn} htmlFor={'img'}>Выберите фото игрушки</label>
+             {/*    <label className={s.choosePhotoBtn} htmlFor={'img'}>Выберите фото игрушки</label>
                     <input
                         hidden
                         type="file"
@@ -251,7 +278,23 @@ const AdminPage = () => {
                         <div style={{color:'red'}}>
                             {errorsToy?.img.message}
                         </div>
+                    } */}
+                    {drag
+                        ? <div
+                            className={s.dropArea}
+                            onDragStart={e => dragStartHandler(e)}
+                            onDragLeave={e => dragLeaveHandler(e)}
+                            onDragOver={e => dragStartHandler(e)}
+                            onDrop={e => onDropHandler(e)}
+                        >Отпустите фото, чтобы его загрузить</div>
+                        : <div
+                            className={s.dropAreaNotActive}
+                            onDragStart={e => dragStartHandler(e)}
+                            onDragLeave={e => dragLeaveHandler(e)}
+                            onDragOver={e => dragStartHandler(e)}
+                        >{fileName ? `${fileName}` : 'Перетащите фото, чтобы его загрузить'}</div>
                     }
+                    {photoError ? <div style={{color:'red'}}>{photoError}</div> : null}
                     <button type="submit" className={s.applyBtn}>Добавить</button>
                 </form>
                 </Modal>
