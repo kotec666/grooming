@@ -3,6 +3,7 @@ import s from './Services.module.css'
 import TypeItem from "../../components/TypeItem"
 import {serviceAPI} from "../../servicesAPI/TypeService"
 import {calculatePagesCount} from "../../hooks/usePagination"
+import ServiceLoader from "./ServiceLoader"
 
 
 
@@ -40,7 +41,9 @@ const Services = () => {
                 <div className={s.services__wrapper}>
                     <div className={s.service__wrapper}>
                         {
-                            isLoading && isLoading ? <h1>Загрузка.....</h1>
+                            isLoading && isLoading ? Array(2)
+                                    .fill(0)
+                                    .map((_, index) => <ServiceLoader key={index} />)
                             :  services && services.rows.map(service => {
                                 return <TypeItem key={service.id} id={service.id} name={service.name} servicesData={service.servicesData}  />
                             })

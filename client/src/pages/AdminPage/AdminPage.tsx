@@ -47,7 +47,7 @@ const AdminPage = () => {
             await createType(data)
             setIsTypeOpened(false)
         } catch (e) {
-           console. log('произошла ошибка при создании типа')
+           console.log('произошла ошибка при создании типа')
         }
     })
 
@@ -56,7 +56,7 @@ const AdminPage = () => {
            await createService(data)
            setIsServiceOpened(false)
         } catch (e) {
-           console. log('произошла ошибка при создании услуги')
+           console.log('произошла ошибка при создании услуги')
         }
 
     })

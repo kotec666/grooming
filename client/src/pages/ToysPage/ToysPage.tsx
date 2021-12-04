@@ -4,6 +4,7 @@ import ToyItem from "../../components/ToyItem/ToyItem"
 import {toyAPI} from "../../servicesAPI/ToysService"
 import ToyPagination from "../../components/ToyPagination/ToyPagination"
 import {calculatePagesCount} from "../../hooks/usePagination"
+import ToyLoader from "../../components/ToyItem/ToyLoader"
 
 
 
@@ -27,7 +28,9 @@ const ToysPage = () => {
         <>
         <div className={s.toys__wrapper}>
             {
-                isLoading && isLoading ? <h1>Загрузка.....</h1>
+                isLoading && isLoading ? Array(6)
+                    .fill(0)
+                    .map((_, index) => <ToyLoader key={index} />)
                     :
                 toys && toys.rows.map(toy => {
                     return <ToyItem key={toy.id} isBasket={false} id={toy.id} name={toy.name} img={toy.img} price={toy.price} />

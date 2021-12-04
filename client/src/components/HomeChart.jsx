@@ -45,14 +45,9 @@ const data = genData()
 
 const HomeChart = () => {
     const [clickedElement, setClickedElement] = useState('')
-    // const [clickedDataset, setClickedDataset] = useState('')
-    // const [clickedElements, setClickedElements] = useState('')
 
     const getDatasetAtEvent = dataset => {
         if (!dataset.length) return
-
- //     const datasetIndex = dataset[0].datasetIndex
- //       setClickedDataset(data.datasets[datasetIndex].label)
     }
 
     const getElementAtEvent = element => {
@@ -66,8 +61,6 @@ const HomeChart = () => {
 
     const getElementsAtEvent = elements => {
         if (!elements.length) return
-
-  //      setClickedElements(elements.length)
     }
 
     return (
@@ -78,11 +71,10 @@ const HomeChart = () => {
                 getDatasetAtEvent={getDatasetAtEvent}
                 getElementAtEvent={getElementAtEvent}
                 getElementsAtEvent={getElementsAtEvent}
+                type={clickedElement}
             />
             <div className='text-center'>
                 <p>{clickedElement}</p>
-                {/*{<p>{clickedDataset}</p>*/}
-                {/*    <p>{clickedElements}</p>}*/}
             </div>
         </>
     )
