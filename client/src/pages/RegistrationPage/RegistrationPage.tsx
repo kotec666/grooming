@@ -11,8 +11,8 @@ const RegistrationPage = () => {
     const [regError, setRegError] = useState('')
 
     const history = useHistory()
-    const [registrationUser, {}] = userAPI.useRegistrationUserMutation()
-    const [loginUser, {}] = userAPI.useLoginUserMutation()
+    const [registrationUser] = userAPI.useRegistrationUserMutation()
+    const [loginUser] = userAPI.useLoginUserMutation()
 
     const {register: registerRegistration, formState: { errors: errorsRegistration }, handleSubmit: handleSubmitRegistration} = useForm<IRegistrationUserReq>()
 

@@ -3,6 +3,7 @@ import s from './Navbar.module.css'
 import paw from './../../utils/images/paw.png'
 import {Link, NavLink} from "react-router-dom"
 import {
+    ABOUT_ROUTE,
     ADMIN_ROUTE,
     CART_ROUTE,
     LOGIN_ROUTE,
@@ -29,6 +30,7 @@ const Navbar = () => {
                         <NavLink to={TOYS_ROUTE} activeClassName={s.link__active}>Игрушки</NavLink>
                         <NavLink to={CART_ROUTE} activeClassName={s.link__active}>Корзина</NavLink>
                         <NavLink to={PROFILE_ROUTE} activeClassName={s.link__active}>Профиль</NavLink>
+                        <NavLink to={ABOUT_ROUTE} activeClassName={s.link__active}>О нас</NavLink>
                         {
                             user.role === 'ADMIN' ?
                                 <NavLink to={ADMIN_ROUTE} activeClassName={s.link__active}>Админ</NavLink> : null
@@ -38,6 +40,7 @@ const Navbar = () => {
                     <>
                         <NavLink to={SERVICES_ROUTE}  activeClassName={s.link__active}>Услуги</NavLink>
                         <NavLink to={TOYS_ROUTE} activeClassName={s.link__active}>Игрушки</NavLink>
+                        <NavLink to={ABOUT_ROUTE} activeClassName={s.link__active}>О нас</NavLink>
                         <NavLink to={LOGIN_ROUTE} activeClassName={s.link__active}>Вход</NavLink>
                         <NavLink to={REGISTRATION_ROUTE} activeClassName={s.link__active}>Регистрация</NavLink>
                     </>

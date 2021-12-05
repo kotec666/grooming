@@ -20,8 +20,8 @@ const ToyItem:React.FC<IToyItemProps> = ({id, name, img, price, isBasket}) => {
 
     const {user, isAuth} = useAppSelector(state => state.userReducer)
     const {data: basket} = basketAPI.useFetchAllBasketByIdQuery(user.id)
-    const [createBasketToy, {}] = basketAPI.useCreateBasketToyMutation()
-    const [deleteBasketToy, {}] = basketAPI.useDeleteBasketToyMutation()
+    const [createBasketToy] = basketAPI.useCreateBasketToyMutation()
+    const [deleteBasketToy] = basketAPI.useDeleteBasketToyMutation()
     const [deleteToy] = toyAPI.useDeleteToyMutation()
 
     const addToyToCartHandler = async (toyId:number) => {

@@ -1,20 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import './App.css'
 import Navbar from "./components/NavBar/Navbar"
 import {AppRouter} from "./components/AppRouter"
 import {userAPI} from "./servicesAPI/UserService"
-import {useAppDispatch, useAppSelector} from "./hooks/redux";
-import {basketAPI} from "./servicesAPI/BasketService";
+import {useAppSelector} from "./hooks/redux"
+import {basketAPI} from "./servicesAPI/BasketService"
 
 
 function App() {
 
-    const [loading, setLoading] = useState(true)
-    const [loginUser] = userAPI.useLoginUserMutation()
-
-    const {} = userAPI.useCheckUserQuery(null)
+    userAPI.useCheckUserQuery(null)
     const {user} = useAppSelector(state => state.userReducer)
-    const {} = basketAPI.useFetchAllBasketByIdQuery(user.id)
+    basketAPI.useFetchAllBasketByIdQuery(user.id)
 
 
   return (

@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react"
-import {IToys, IToy, ICreateToyReq} from "../models/IToys"
+import {IToys, IToy} from "../models/IToys"
 
 
 

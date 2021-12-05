@@ -20,7 +20,7 @@ const TypeItem:React.FC<ITypeItemProps> = ({id, name, servicesData}) => {
 
     const {user, isAuth} = useAppSelector(state => state.userReducer)
     const {data: basket} = basketAPI.useFetchAllBasketByIdQuery(user.id)
-    const [createBasketService, {}] = basketAPI.useCreateBasketServiceMutation()
+    const [createBasketService] = basketAPI.useCreateBasketServiceMutation()
     const [deleteType] = serviceAPI.useDeleteTypeMutation()
     const [deleteService] = serviceAPI.useDeleteServiceMutation()
 

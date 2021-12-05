@@ -12,7 +12,7 @@ const LoginPage = () => {
     const [loginError, setLoginError] = useState('')
 
     const history = useHistory()
-    const [loginUser, {}] = userAPI.useLoginUserMutation()
+    const [loginUser] = userAPI.useLoginUserMutation()
 
     const {register: registerLogin, formState: { errors: errorsLogin }, handleSubmit: handleSubmitLogin} = useForm<ILoginUserReq>()
 

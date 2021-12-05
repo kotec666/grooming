@@ -17,7 +17,7 @@ const ServiceItem:React.FC<IServiceItemProps> = ({id, name, price}) => {
 
     const {user} = useAppSelector(state => state.userReducer)
     const {data: basket} = basketAPI.useFetchAllBasketByIdQuery(user.id)
-    const [deleteBasketService, {}] = basketAPI.useDeleteBasketServiceMutation()
+    const [deleteBasketService] = basketAPI.useDeleteBasketServiceMutation()
 
     const deleteServiceFromCartHandler = async (serviceId:number) => {
         if (basket) {
