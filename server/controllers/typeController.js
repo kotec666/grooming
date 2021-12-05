@@ -75,6 +75,19 @@ class TypeController {
         }
     }
 
+
+
+    async changeInfo(req, res, next) {
+        try {
+            const type = await Type.findByPk(+req.params.id)
+            type.name = req.body.name
+            await type.save()
+            return res.json(type)
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
 }
 
 module.exports = new TypeController()

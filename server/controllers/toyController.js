@@ -52,6 +52,22 @@ class ToyController {
         }
     }
 
+
+    async changeInfo(req, res, next) {
+        try {
+            const toy = await Toy.findByPk(+req.params.id)
+            toy.name = req.body.name
+            toy.price = req.body.price
+            await toy.save()
+            return res.json(toy)
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+
+
+
 }
 
 module.exports = new ToyController()

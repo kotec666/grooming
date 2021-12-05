@@ -24,6 +24,21 @@ class ServiceController {
             next(ApiError.badRequest(e.message))
         }
     }
+
+    async changeInfo(req, res, next) {
+        try {
+            const service = await Service.findByPk(+req.params.id)
+            service.name = req.body.name
+            service.description = req.body.description
+            service.price = req.body.price
+            await service.save()
+            return res.json(service)
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+
 }
 
 module.exports = new ServiceController()

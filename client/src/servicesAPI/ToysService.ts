@@ -33,5 +33,16 @@ export const toyAPI = createApi({
             }),
             invalidatesTags: ['Toys']
         }),
+        changeInfoToy: build.mutation<IToy, IToy>({
+            query: (toy) => ({
+                url: `/toy/${toy.id}`,
+                method: 'PUT',
+                body: toy,
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            }),
+            invalidatesTags: ['Toys']
+        }),
     })
 })

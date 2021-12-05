@@ -10,8 +10,6 @@ export interface IToy {
     name: string
     price: number
     img: string
-    createdAt: string
-    updatedAt: string
 }
 
 

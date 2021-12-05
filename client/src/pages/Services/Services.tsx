@@ -35,6 +35,8 @@ const Services = () => {
             setPage(newPage)
     }
 
+
+
     return (
         <div>
             <div className={s.content__wrapper}>

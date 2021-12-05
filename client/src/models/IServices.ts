@@ -15,6 +15,13 @@ export interface IServicesDataReq {
     typeId: number
 }
 
+export interface IServicesDataReqPut {
+    id: number
+    name: string
+    description: string
+    price: number
+}
+
 
 interface IRows {
     id: number

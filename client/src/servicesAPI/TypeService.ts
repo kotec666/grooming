@@ -4,9 +4,10 @@ import {
     ICreateTypeRes,
     IServices,
     IServicesData,
-    IServicesDataReq,
+    IServicesDataReq, IServicesDataReqPut,
     IType
 } from "../models/IServices"
+
 
 
 export const serviceAPI = createApi({
@@ -54,6 +55,28 @@ export const serviceAPI = createApi({
             query: (serviceId) => ({
                 url: `/service/${serviceId}`,
                 method: 'DELETE',
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            }),
+            invalidatesTags: ['Service']
+        }),
+        changeInfoService: build.mutation<IServicesData, IServicesDataReqPut>({
+            query: (service) => ({
+                url: `/service/${service.id}`,
+                method: 'PUT',
+                body: service,
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('token')}`,
+                },
+            }),
+            invalidatesTags: ['Service']
+        }),
+        changeInfoType: build.mutation<IType, IType>({
+            query: (type) => ({
+                url: `/type/${type.id}`,
+                method: 'PUT',
+                body: type,
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('token')}`,
                 },

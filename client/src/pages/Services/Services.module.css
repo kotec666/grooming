@@ -71,6 +71,7 @@
     margin: 5% 5% 0 5%;
 }
 
+
 .service__wrapper h3 {
     font-size: 20px;
     color: #000000;
@@ -204,4 +205,31 @@
     color: #FF6B7F;
     text-decoration: none;
     cursor: pointer;
+}
+
+.changeInfoInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #FFFFFF;
+    border-radius: 3px;
+
+    font-weight: bold;
+    font-size: 15px;
+
+    width: 70%;
+    margin: 5%;
+
+    color: #00A2FA;
+    height: 60px;
+    outline: none;
+    border: 2px solid black;
+}
+
+.type__name__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
 }

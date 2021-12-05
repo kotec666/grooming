@@ -7,6 +7,7 @@ router.post('/', checkRole('ADMIN'), typeController.create)
 router.get('/', typeController.getAll)
 router.get('/:id', typeController.getOne)
 router.delete('/:id', checkRole('ADMIN'), typeController.deleteOne)
+router.put('/:id', checkRole('ADMIN'), typeController.changeInfo)
 
 
 
