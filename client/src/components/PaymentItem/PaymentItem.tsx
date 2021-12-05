@@ -13,10 +13,16 @@ interface IPaymentItemProps {
 const PaymentItem:React.FC<IPaymentItemProps> = ({items, isServices}) => {
 
 
+    let price = []
+    for (let i in items) {
+        if (items.hasOwnProperty(i)) {
+            price.push(items[i].price)
+        }
+    }
 
-    // @ts-ignore
-     const totalPrice = items.reduce((sum:number, item:  IServicesData | IToy) =>  sum + item.price , 0)
-
+    const totalPrice = price.reduce(function(accumulator, currentValue) {
+        return accumulator + currentValue
+    }, 0)
 
 
     return (

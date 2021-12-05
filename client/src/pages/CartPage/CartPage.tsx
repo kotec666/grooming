@@ -47,7 +47,7 @@ const CartPage = () => {
                                }
                            </div>
                            <div className={s.services__payment__wrapper}>
-                               {basket && <PaymentItem isServices={false} items={basket?.toys} />}
+                               {basket && <PaymentItem isServices={false} items={basket.toys} />}
                            </div>
                        </>
                }
