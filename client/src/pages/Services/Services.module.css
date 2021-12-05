@@ -233,3 +233,13 @@
     align-items: center;
     column-gap: 10px;
 }
+
+.cancellation {
+    cursor: pointer;
+    padding: 2%;
+    background-color: #FF6B7F;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    color: white;
+}

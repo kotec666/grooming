@@ -75,7 +75,11 @@ const ToyItem:React.FC<IToyItemProps> = ({id, name, img, price, isBasket}) => {
             <div className={s.toy__wrapper}>
                 {user.role === 'ADMIN' ?
                     isActive === id
-                    ? <input type="text" value={toyInfo.name} onKeyDown={(e) => handleSaveInfo(e)} onChange={(e) => handleChangeName(e, id, name, img)} className={s.changeInfoInput}/>
+                    ?
+                     <>
+                        <input type="text" value={toyInfo.name} onKeyDown={(e) => handleSaveInfo(e)} onChange={(e) => handleChangeName(e, id, name, img)} className={s.changeInfoInput}/>
+                        <button onClick={() => setIsActive(0)}>отмена</button>
+                     </>
                     : <h3 onDoubleClick={() => setIsActive(id)}>{name}</h3> : <h3>{name}</h3>
                 }
                 <div className={s.img__wrapper}>

@@ -92,7 +92,11 @@ const TypeItem:React.FC<ITypeItemProps> = ({id, name, servicesData}) => {
                 <div className={s.type__name__wrapper}>
                     {user.role === 'ADMIN' ?
                         isActiveType === id
-                            ? <input type="text" value={typeInfo.name} onKeyDown={(e) => handleSaveTypeInfo(e)} onChange={(e) => handleChangeTypeName(e, id)} className={s.changeInfoInput}/>
+                            ?
+                        <>
+                            <input type="text" value={typeInfo.name} onKeyDown={(e) => handleSaveTypeInfo(e)} onChange={(e) => handleChangeTypeName(e, id)} className={s.changeInfoInput}/>
+                            <button onClick={() => setIsActiveType(0)} className={s.cancellation}>отмена редактирования</button>
+                        </>
                             : <h3 onDoubleClick={() => setIsActiveType(id)}>{name}</h3> : <h3>{name}</h3>
                     }
                     {
@@ -110,7 +114,11 @@ const TypeItem:React.FC<ITypeItemProps> = ({id, name, servicesData}) => {
                                         <div className={s.service__name__wrapper}>
                                         {user.role === 'ADMIN' ?
                                             isActive === serviceData.id
-                                                ? <input type="text" value={serviceInfo.name} onKeyDown={(e) => handleSaveInfo(e)} onChange={(e) => handleChangeName(e, serviceData.id)} className={s.changeInfoInput}/>
+                                                ?
+                                                <>
+                                                    <input type="text" value={serviceInfo.name} onKeyDown={(e) => handleSaveInfo(e)} onChange={(e) => handleChangeName(e, serviceData.id)} className={s.changeInfoInput}/>
+                                                    <button onClick={() => setIsActive(0)} className={s.cancellation}>отмена редактирования</button>
+                                                </>
                                                 : <h3 onDoubleClick={() => setIsActive(serviceData.id)}>{serviceData.name}</h3> : <h3>{serviceData.name}</h3>
                                         }
                                         </div>
