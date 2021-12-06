@@ -204,18 +204,18 @@ const AdminPage = () => {
                              required: "Поле обязательно для заполнения",
                          })}
                       >
-                         {
-                             errorsService?.typeId &&
-                             <div style={{color:'red'}}>
-                                 {errorsService?.typeId.message}
-                             </div>
-                         }
                           {
                                services && services.rows.map(service => {
                                  return <option key={service.id} value={service.id}>{service.name}</option>
                               })
                          }
                       </select>
+                        {
+                            errorsService?.typeId &&
+                            <div style={{color:'red'}}>
+                                {errorsService?.typeId.message}
+                            </div>
+                        }
                         <button type="submit" className={s.applyBtn}>Добавить</button>
                     </form>
                 </Modal>

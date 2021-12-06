@@ -68,6 +68,39 @@ const BasketService = sequelize.define('basket_service', {
 
 
 
+const Order = sequelize.define('order', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+    }
+})
+
+
+
+const OrderToy = sequelize.define('order_toy', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+        unique: false
+    }
+})
+
+const OrderService = sequelize.define('order_service', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+        unique: false
+    }
+})
+
+
+
 const Toy = sequelize.define('toy', {
     id: {
         type: DataTypes.INTEGER,
@@ -127,6 +160,46 @@ const Type = sequelize.define('type', {
 })
 
 
+User.hasOne(Order)
+Order.belongsTo(User)
+
+Order.hasMany(OrderToy, {as: 'orderToys', unique:false})
+OrderToy.belongsTo(Order)
+
+Order.hasMany(OrderService, {as: 'orderService', unique:false})
+OrderService.belongsTo(Order)
+
+Toy.hasMany(OrderToy, {as: 'order_toys', unique:false})
+OrderToy.belongsTo(Toy)
+
+Service.hasMany(OrderService, {as: 'order_services', unique:false})
+OrderService.belongsTo(Service)
+
+Toy.belongsToMany(Order, {
+    through: {
+        model: OrderToy,
+        unique: false
+    },
+
+})
+
+Order.belongsToMany(Toy, {
+    through: {
+        model: OrderToy,
+        unique: false
+    },
+
+}) // A BelongsToMany B through the junction table C
+
+Order.belongsToMany(Service, {
+    through: {
+        model: OrderService,
+        unique: false
+    },
+
+})
+
+
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
@@ -160,5 +233,5 @@ Basket.belongsToMany(Service, { through: BasketService })
 
 
 module.exports = {
-    User, Basket, BasketToy, BasketService, Toy, Service, Type
+    User, Basket, BasketToy, BasketService, Toy, Service, Type, Order, OrderService, OrderToy
 }

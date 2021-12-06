@@ -5,6 +5,7 @@ import {AppRouter} from "./components/AppRouter"
 import {userAPI} from "./servicesAPI/UserService"
 import {useAppSelector} from "./hooks/redux"
 import {basketAPI} from "./servicesAPI/BasketService"
+import {orderAPI} from "./servicesAPI/OrderService"
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     userAPI.useCheckUserQuery(null)
     const {user} = useAppSelector(state => state.userReducer)
     basketAPI.useFetchAllBasketByIdQuery(user.id)
+    orderAPI.useFetchAllOrderByIdQuery(user.id)
 
 
   return (
