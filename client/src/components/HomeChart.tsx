@@ -19,7 +19,7 @@ const data = {
 
 const HomeChart = () => {
     return (
-        <div className="App">
+        <div>
             <Line data={data} />
         </div>
     )
