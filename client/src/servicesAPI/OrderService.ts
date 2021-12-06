@@ -19,7 +19,7 @@ export const orderAPI = createApi({
             query: (toy) => ({
                 url: `/orderToys`,
                 method: 'POST',
-                body: toy // toyId: number orderId: number
+                body: toy
             }),
             invalidatesTags: ['Order']
         }),
@@ -27,7 +27,7 @@ export const orderAPI = createApi({
             query: (service) => ({
                 url: `/orderServices`,
                 method: 'POST',
-                body: service // serviceId: number orderId: number
+                body: service
             }),
             invalidatesTags: ['Order']
         }),
@@ -35,7 +35,7 @@ export const orderAPI = createApi({
             query: (toy) => ({
                 url: `/orderToys`,
                 method: 'DELETE',
-                body: toy //toy_id, order_id
+                body: toy
             }),
             invalidatesTags: ['Order']
         }),
@@ -43,7 +43,7 @@ export const orderAPI = createApi({
             query: (service) => ({
                 url: `/orderServices`,
                 method: 'DELETE',
-                body: service //service_id, order_id
+                body: service
             }),
             invalidatesTags: ['Order']
         }),

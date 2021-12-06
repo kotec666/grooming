@@ -37,10 +37,6 @@ export interface IRegistrationUserRes {
 
 type Nullable<T> = T | null
 
-//запрос на сервер
-export interface ICheckUserReq {
-    token: Nullable<string>
-}
 
 
 //ответ от сервера

@@ -35,7 +35,7 @@ export const basketAPI = createApi({
             query: (toy) => ({
                 url: `/basketToys`,
                 method: 'DELETE',
-                body: toy //toy_id, basket_id
+                body: toy
             }),
             invalidatesTags: ['Basket']
         }),
@@ -43,7 +43,7 @@ export const basketAPI = createApi({
             query: (service) => ({
                 url: `/basketServices`,
                 method: 'DELETE',
-                body: service //service_id, basket_id
+                body: service
             }),
             invalidatesTags: ['Basket']
         }),

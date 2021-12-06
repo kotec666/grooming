@@ -4,7 +4,7 @@ import dog from './../../utils/images/dog.png'
 import paw from './../../utils/images/paw.png'
 import HomeChart from "../../components/HomeChart"
 import { Link } from 'react-router-dom'
-import {SERVICES_ROUTE} from "../../utils/consts";
+import {SERVICES_ROUTE} from "../../utils/consts"
 
 const Home = () => {
     return (

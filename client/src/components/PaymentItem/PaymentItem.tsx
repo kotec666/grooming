@@ -28,8 +28,7 @@ const PaymentItem:React.FC<IPaymentItemProps> = ({items, isServices}) => {
     const {user} = useAppSelector(state => state.userReducer)
     const {data: basket} = basketAPI.useFetchAllBasketByIdQuery(user.id)
     const {data: order} = orderAPI.useFetchAllOrderByIdQuery(user.id)
-    // toyId: number
-    // orderId: number
+
 
     let price = []
     for (let i in items) {

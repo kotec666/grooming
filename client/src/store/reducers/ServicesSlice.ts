@@ -20,20 +20,7 @@ const initialState: ServicesState = {
 export const servicesSlice = createSlice({
     name:'services',
     initialState,
-    reducers: {
-        // servicesFetching(state) {
-        //     state.isLoading = true
-        // },
-        // servicesFetchingSuccess(state, action: PayloadAction<IServices>) {
-        //     state.isLoading = false
-        //     state.error = ''
-        //     state.services = action.payload
-        // },
-        // servicesFetchingError(state, action: PayloadAction<string>) {
-        //     state.isLoading = false
-        //     state.error = action.payload
-        // },
-    },
+    reducers: {},
     extraReducers: {
         [fetchServices.fulfilled.type]: (state, action: PayloadAction<IServices>) => {
             state.isLoading = false

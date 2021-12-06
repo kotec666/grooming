@@ -264,21 +264,6 @@ const AdminPage = () => {
                             {errorsToy?.price.message}
                         </div>
                     }
-             {/*    <label className={s.choosePhotoBtn} htmlFor={'img'}>Выберите фото игрушки</label>
-                    <input
-                        hidden
-                        type="file"
-                        id={'img'}
-                        {...registerToy("img", {
-                            required: "Поле изображения обязательно для заполнения"
-                        })}
-                    />
-                    {
-                        errorsToy?.img &&
-                        <div style={{color:'red'}}>
-                            {errorsToy?.img.message}
-                        </div>
-                    } */}
                     {drag
                         ? <div
                             className={s.dropArea}

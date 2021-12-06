@@ -17,7 +17,7 @@ export const userAPI = createApi({
             query: (user) => ({
                 url: `/login`,
                 method: 'POST',
-                body: user //login, password
+                body: user
             }),
 
             invalidatesTags: ['User']
@@ -26,7 +26,7 @@ export const userAPI = createApi({
             query: (user) => ({
                 url: `/registration`,
                 method: 'POST',
-                body: user //login, password, email, phone, role
+                body: user
             }),
             invalidatesTags: ['User']
         }),

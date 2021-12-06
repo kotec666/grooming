@@ -16,7 +16,7 @@ import {
     REGISTRATION_ROUTE,
     SERVICES_ROUTE, TOYS_ROUTE
 } from "./utils/consts"
-import AboutPage from "./pages/AboutPage/AboutPage";
+import AboutPage from "./pages/AboutPage/AboutPage"
 
 export const authRoutes = [
     {

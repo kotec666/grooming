@@ -189,7 +189,7 @@ Order.belongsToMany(Toy, {
         unique: false
     },
 
-}) // A BelongsToMany B through the junction table C
+})
 
 Order.belongsToMany(Service, {
     through: {

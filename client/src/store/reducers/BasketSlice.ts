@@ -21,20 +21,6 @@ export const basketSlice = createSlice({
     name:'basket',
     initialState,
     reducers: {},
-    // extraReducers: {
-    //     [fetchBasket.fulfilled.type]: (state, action: PayloadAction<IBasket>) => {
-    //         state.isLoading = false
-    //         state.error = ''
-    //         state.basket = action.payload
-    //     },
-    //     [fetchBasket.pending.type]: (state) => {
-    //         state.isLoading = true
-    //     },
-    //     [fetchBasket.rejected.type]: (state, action: PayloadAction<string>) => {
-    //         state.isLoading = false
-    //         state.error = action.payload
-    //     },
-    // }
     extraReducers: (builder) => {
         builder.addMatcher(
             basketAPI.endpoints.fetchAllBasketById.matchFulfilled,
