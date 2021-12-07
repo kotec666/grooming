@@ -13,7 +13,7 @@
 Frontend
 
 react 
-redux toolkit 
+redux toolkit + RTK Query
 axios
 react-chartjs-2
 jwt-decode
